@@ -1,7 +1,7 @@
-import './login.css';
-import not_show from './not_show.png'
-import show from './show.png'
-import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom';
+import '../CSS/SignUpPage.css';
+import not_show from '../images/not_show.png'
+import show from '../images/show.png'
 
 function clearForm(id,error_id,error){
   if(id !== ""){
@@ -66,7 +66,7 @@ export default function Login(props) {
     <div className="container">
       <div className="left-section">
         <div className="content">
-          <h2>Find 3D Objects, Mockups and Illustrations here.</h2>
+          <h2>lorem ispum random text here for testing</h2>
           <div className="graphics"></div>
         </div>
       </div>
@@ -149,8 +149,8 @@ export default function Login(props) {
             </button>
           </form>
           <p>
-             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            {props.question} <a href="#">{props.page}</a>
+             Already Have a Account?
+            <Link to={"/"}> Login</Link>
           </p>
         </div>
       </div>
@@ -158,12 +158,3 @@ export default function Login(props) {
   );
 }
 
-Login.propTypes = {
-  question : PropTypes.string.isRequired,
-  page : PropTypes.string
-}
-
-Login.defaultProps = {
-  question : "Already have an Account?",
-  page : "Login"
-}

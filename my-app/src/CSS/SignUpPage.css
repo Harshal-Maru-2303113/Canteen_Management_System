@@ -1,0 +1,159 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: hsl(188, 45%, 78%);
+    padding: 20px;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: row;
+    width: 900px;
+    max-width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  
+  .left-section {
+    flex: 1;
+    background-color: #e0f7f9;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .left-section .content h2 {
+    font-size: 1.5em;
+    color: #555555;
+    margin-bottom: 20px;
+  }
+  
+  .left-section .graphics {
+    width: 100%;
+    height: 300px;
+    /* background-image: url('your-graphic-image-url.png'); */
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+  }
+  
+  .right-section {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .signup-form {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+  }
+  
+  .signup-form h2 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333333;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  form input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 100%;
+  }
+  
+  form input::placeholder {
+    color: #aaaaaa;
+  }
+  
+  .submit-btn {
+    padding: 10px;
+    background-color: #36b1c7;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1em;
+    border-radius: 5px;
+  }
+  
+  .signup-form p {
+    margin-top: 20px;
+    font-size: 0.9em;
+  }
+  
+  .signup-form a {
+    color: #36b1c7;
+    text-decoration: none;
+  }
+  
+  .password-container {
+    position: relative;
+  }
+  
+  .password-container input {
+    width: calc(100% - 40px); 
+    padding-right: 40px; 
+  }
+  
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em; 
+  }
+  
+  .toggle-password img {
+    width: 20px; 
+    height: 20px;
+  }
+  
+  .error-message {
+    display: none; 
+    color: #ff4d4f; 
+    font-size: 0.9em;
+    margin-top: -10px; 
+    margin-bottom: 15px; 
+    text-align: left;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+  
+    .left-section,
+    .right-section {
+        width: 100%;
+        padding: 20px;
+    }
+  
+    .left-section .graphics {
+        height: 200px;
+    }
+  
+    .signup-form {
+        max-width: 100%;
+    }
+  }
+  
