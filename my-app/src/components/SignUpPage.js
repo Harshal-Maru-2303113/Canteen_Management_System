@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import '../CSS/SignUpPage.css';
 import not_show from '../images/not_show.png'
 import show from '../images/show.png'
+import axios from 'axios'
 
 function clearForm(id,error_id,error){
   if(id !== ""){
@@ -47,6 +48,11 @@ function submitForm(){
     // eslint-disable-next-line
     val = 0;  
   }
+  if (val === 1) {
+    axios.post('http://localhost:5000/signup',{email,name,password})
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+}
 }
 
 function switchPassword(id,id_img){

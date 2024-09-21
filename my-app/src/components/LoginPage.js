@@ -1,50 +1,53 @@
-import { Link } from 'react-router-dom';
-import '../CSS/LoginPage.css';
-import not_show from '../images/not_show.png'
-import show from '../images/show.png'
+import { Link } from "react-router-dom";
+import "../CSS/LoginPage.css";
+import not_show from "../images/not_show.png";
+import show from "../images/show.png";
+import axios from 'axios'
 
-function clearForm(id,error_id,error){
-  if(id !== ""){
-    document.getElementById(id).value="";
+function clearForm(id, error_id, error) {
+  if (id !== "") {
+    document.getElementById(id).value = "";
   }
   document.getElementById(error_id).style.display = "block";
-  document.getElementById(error_id).innerHTML=error;
+  document.getElementById(error_id).innerHTML = error;
 }
 
-function clearError(error_id){
+function clearError(error_id) {
   document.getElementById(error_id).style.display = "none";
-  document.getElementById(error_id).innerHTML="";
+  document.getElementById(error_id).innerHTML = "";
 }
 
-function submitForm(){
+function submitForm() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
   let val = 1;
-  if(email === ""){
+  if (email === "") {
     val = 0;
-    clearForm("email","error-email","Enter your IITGOA Email");
-  }
-  else if(email.substring(email.length-13) !== "@iitgoa.ac.in"){
-    clearForm("","error-email","Enter your IITGOA Email");
-    val = 0;
-  }
-  if(password === ""){
-    clearForm("password","error-pass","Enter a Password");
-        // eslint-disable-next-line
+    clearForm("email", "error-email", "Enter your IITGOA Email");
+  } else if (email.substring(email.length - 13) !== "@iitgoa.ac.in") {
+    clearForm("", "error-email", "Enter your IITGOA Email");
     val = 0;
   }
-
+  if (password === "") {
+    clearForm("password", "error-pass", "Enter a Password");
+    // eslint-disable-next-line
+    val = 0;
+  }
+  if (val === 1) {
+      axios.post('http://localhost:5000/login',{email,password})
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  }
 }
 
-function switchPassword(id,id_img){
+function switchPassword(id, id_img) {
   let type = document.getElementById(id_img);
-  if(type.src ===not_show){
-      document.getElementById(id).setAttribute('type','text');
-      type.src = show;
-  }
-  else{
-      document.getElementById(id).setAttribute('type','password');
-      type.src = not_show;
+  if (type.src === not_show) {
+    document.getElementById(id).setAttribute("type", "text");
+    type.src = show;
+  } else {
+    document.getElementById(id).setAttribute("type", "password");
+    type.src = not_show;
   }
 }
 
@@ -66,12 +69,11 @@ export default function Login(props) {
               type="email"
               placeholder="IITGOA Email"
               required
-              onClick={() => clearError('error-email')}
+              onClick={() => clearError("error-email")}
             />
             <span className="error-message" id="error-email">
               Email is required
             </span>
-
 
             <div className="password-container">
               <input
@@ -79,16 +81,16 @@ export default function Login(props) {
                 id="password"
                 placeholder="Password"
                 required
-                onClick={() => clearError('error-pass')}
+                onClick={() => clearError("error-pass")}
               />
               <button
                 type="button"
                 className="toggle-password"
-                onClick={() => switchPassword('password', 'switch-pass')}
+                onClick={() => switchPassword("password", "switch-pass")}
               >
                 <img
                   id="switch-pass"
-                  src= {not_show}
+                  src={not_show}
                   alt="Password Visibility"
                 />
               </button>
@@ -102,7 +104,7 @@ export default function Login(props) {
             </button>
           </form>
           <p>
-            Don't Have a Account? 
+            Don't Have a Account?
             <Link to={"/signup"}> Signup</Link>
           </p>
         </div>
@@ -110,4 +112,3 @@ export default function Login(props) {
     </div>
   );
 }
-
