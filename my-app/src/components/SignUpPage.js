@@ -4,66 +4,65 @@ import not_show from '../images/not_show.png'
 import show from '../images/show.png'
 import axios from 'axios'
 
-function clearForm(id,error_id,error){
-  if(id !== ""){
-    document.getElementById(id).value="";
+function clearForm(id, error_id, error) {
+  if (id !== "") {
+    document.getElementById(id).value = "";
   }
   document.getElementById(error_id).style.display = "block";
-  document.getElementById(error_id).innerHTML=error;
+  document.getElementById(error_id).innerHTML = error;
 }
 
-function clearError(error_id){
+function clearError(error_id) {
   document.getElementById(error_id).style.display = "none";
-  document.getElementById(error_id).innerHTML="";
+  document.getElementById(error_id).innerHTML = "";
 }
 
-function submitForm(){
+function submitForm() {
   const email = document.getElementById("email").value;
   const name = document.getElementById("name").value;
   const password = document.getElementById("password").value;
   const confi_pass = document.getElementById("confi-pass").value;
   let val = 1;
-  if(email === ""){
+  if (email === "") {
     val = 0;
-    clearForm("email","error-email","Enter your IITGOA Email");
+    clearForm("email", "error-email", "Enter your IITGOA Email");
   }
-  else if(email.substring(email.length-13) !== "@iitgoa.ac.in"){
-    clearForm("","error-email","Enter your IITGOA Email");
-    val = 0;
-  }
-  if(name === ""){
-    clearForm("name","error-name","Enter your Name");
+  else if (email.substring(email.length - 13) !== "@iitgoa.ac.in") {
+    clearForm("", "error-email", "Enter your IITGOA Email");
     val = 0;
   }
-  if(password === ""){
-    clearForm("password","error-pass","Enter a Password");
+  if (name === "") {
+    clearForm("name", "error-name", "Enter your Name");
     val = 0;
   }
-  if(confi_pass === ""){
-    clearForm("confi-pass","error-confi-pass","Confirm your Password");
+  if (password === "") {
+    clearForm("password", "error-pass", "Enter a Password");
     val = 0;
   }
-  else if(password !== confi_pass){
-    clearForm("confi-pass","error-confi-pass","Password is not matching");  
-    // eslint-disable-next-line
-    val = 0;  
+  if (confi_pass === "") {
+    clearForm("confi-pass", "error-confi-pass", "Confirm your Password");
+    val = 0;
+  }
+  else if (password !== confi_pass) {
+    clearForm("confi-pass", "error-confi-pass", "Password is not matching");
+    val = 0;
   }
   if (val === 1) {
-    axios.post('http://localhost:5000/signup',{email,name,password})
-    .then(res => console.log(res))
-    .catch(err => console.log(err));
-}
+    axios.post('http://localhost:5000/signup', { email, name, password })
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  }
 }
 
-function switchPassword(id,id_img){
+function switchPassword(id, id_img) {
   let type = document.getElementById(id_img);
-  if(type.src ===not_show){
-      document.getElementById(id).setAttribute('type','text');
-      type.src = show;
+  if (type.src === not_show) {
+    document.getElementById(id).setAttribute('type', 'text');
+    type.src = show;
   }
-  else{
-      document.getElementById(id).setAttribute('type','password');
-      type.src = not_show;
+  else {
+    document.getElementById(id).setAttribute('type', 'password');
+    type.src = not_show;
   }
 }
 
@@ -117,7 +116,7 @@ export default function Login(props) {
               >
                 <img
                   id="switch-pass"
-                  src= {not_show}
+                  src={not_show}
                   alt="Password Visibility"
                 />
               </button>
@@ -141,7 +140,7 @@ export default function Login(props) {
               >
                 <img
                   id="switch-confi-pass"
-                  src= {not_show}
+                  src={not_show}
                   alt="Password Visibility"
                 />
               </button>
@@ -155,7 +154,7 @@ export default function Login(props) {
             </button>
           </form>
           <p>
-             Already Have a Account?
+            Already Have a Account?
             <Link to={"/"}> Login</Link>
           </p>
         </div>
