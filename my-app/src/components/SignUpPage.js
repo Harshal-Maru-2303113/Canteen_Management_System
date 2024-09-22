@@ -155,7 +155,7 @@ export default function Login(props) {
           </form>
           <p>
             Already Have a Account?
-            <Link to={"/"}> Login</Link>
+            <Link to={"/login"}> Login</Link>
           </p>
         </div>
       </div>

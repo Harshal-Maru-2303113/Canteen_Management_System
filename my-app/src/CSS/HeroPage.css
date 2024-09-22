@@ -1,0 +1,67 @@
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 3rem; /* Consistent with navbar padding */
+    background-color: #f4f4f4; /* Light background */
+    height: 94dvh;
+}
+
+.hero-content {
+    max-width: 50%;
+    text-align: left; /* Align text to the left for better readability */
+}
+
+.hero-title {
+    font-size: 3rem; /* Large title */
+    margin-bottom: 1rem; /* Space below title */
+    color: #333; 
+    padding: 1rem;/* Dark color for contrast */
+}
+
+.hero-description {
+    font-size: 1.25rem; /* Medium description size */
+    margin-bottom: 2rem; /* Space below description */
+    color: #666; 
+    padding: 1rem;/* Subtle color for description */
+}
+.button{
+    padding: 1rem;
+
+}
+
+.btn {
+    padding: 0.5rem 1rem; /* Consistent button padding */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #fff; /* White text color */
+    transition: background 0.3s; /* Transition for hover effect */
+}
+
+.btn-primary {
+    margin: 0.3rem;
+    background-color: #007bff; /* Primary button color */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker on hover */
+}
+
+.btn-secondary {
+    margin: 0.3rem;
+    background-color: #6c757d; /* Secondary button color */
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268; /* Darker on hover */
+}
+
+.hero-image {
+    max-width: 40%; /* Control image size */
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
+}

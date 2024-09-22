@@ -4,6 +4,9 @@ import '../src/CSS/LoginPage.css';
 import Login from "./components/LoginPage"
 import SignUpPage from './components/SignUpPage'
 import Homepage from './components/Homepage';
+import HeroPage from './components/HeroPage';
+import Footer from './components/Footer';
+import NavBar from './components/NavBar';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -11,7 +14,7 @@ import {
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/login",
     element: <Login />
   },
   {
@@ -20,7 +23,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/home",
-    element: <Homepage />
+    element: [<NavBar />,<Homepage />,<Footer />]
+  },
+  {
+    path: "/",
+    element: [<NavBar />,<HeroPage />,<Footer />]
   }
 ]);
 
