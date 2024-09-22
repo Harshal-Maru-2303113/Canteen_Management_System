@@ -10,7 +10,7 @@ app.use(express.json()); // To parse JSON requests
 const cms = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "Harshal@2005",
+    password: "kartik",
     database: "cms"
 })
 
@@ -29,7 +29,15 @@ cms.connect((err) => {
     console.log(`Received: ${values[0]}, ${values[1]}`);
     cms.query(`SELECT * FROM User where email = ? and password = ?`,values, (error, results) => {
         if (error)  console.log(error);
-        else console.log(results);
+        else {
+          console.log(results);
+          if(results != ""){
+            res.status(200).json({ message: 'Login successful' });
+          }
+          else{
+            res.status(400).json({error : "Incorrect email or password"});
+          }
+        };
       });
 }
     
