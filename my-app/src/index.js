@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import '../src/CSS/LoginPage.css';
 import Login from "./components/LoginPage"
 import SignUpPage from './components/SignUpPage'
-import Homepage from './components/Homepage';
+import HomePage from './components/HomePage';
 import HeroPage from './components/HeroPage';
 import Footer from './components/Footer';
 import NavBar from './components/NavBar';
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/home",
-    element: [<NavBar />,<Homepage />,<Footer />]
+    element: [<NavBar />,<HomePage />,<Footer />]
   },
   {
     path: "/",

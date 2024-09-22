@@ -1,0 +1,105 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    font-family: Arial, sans-serif;
+  }
+
+
+  .main-homepage-container {
+    padding: 20px;
+  }
+  
+  /* Title section */
+  .menu-items-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .menu-item{
+        background-color: whitesmoke;
+        margin: 20px;
+  }
+  
+  /* Slider wrapper */
+  .slider-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+  }
+  
+  /* Container holding the cards */
+  .menu-item-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 20px;
+    width: 80%; /* Keep the width of the container limited to 80% of the viewport */
+    padding: 20px;
+  }
+  
+  .menu-item-card {
+    flex: 0 0 auto; /* Make sure each card is not shrinking */
+    width: 250px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    scroll-snap-align: center; /* Optional snapping behavior */
+  }
+  
+  .menu-item-card-main {
+    background-image: url(../images/pizza.jpeg); /* Replace with actual image */
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  
+  .menu-item-card-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay for readability */
+    color: white;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  /* Arrow buttons */
+  .slider-arrow {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+  
+  .left-arrow {
+    left: 0;
+  }
+  
+  .right-arrow {
+    right: 0;
+  }
+  
+  .slider-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  /* Optional: Hide the scrollbar for a cleaner look */
+  .menu-item-container::-webkit-scrollbar {
+    display: none;
+  }
+  
