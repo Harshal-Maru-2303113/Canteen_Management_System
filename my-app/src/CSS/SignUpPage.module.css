@@ -1,4 +1,4 @@
-body {
+.body {
     margin: 0;
     font-family: Arial, sans-serif;
     display: flex;
@@ -65,12 +65,12 @@ body {
     color: #333333;
   }
   
-  form {
+  .form {
     display: flex;
     flex-direction: column;
   }
   
-  form input {
+  .form .input {
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #dddddd;
@@ -78,8 +78,8 @@ body {
     font-size: 1em;
     width: 100%;
   }
-  
-  form input::placeholder {
+       
+  .form .input::placeholder {
     color: #aaaaaa;
   }
   

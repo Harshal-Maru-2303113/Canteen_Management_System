@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import '../CSS/SignUpPage.css';
-import not_show from '../images/not_show.png'
-import show from '../images/show.png'
-import axios from 'axios'
+import SignUpPage from '../CSS/SignUpPage.module.css'; // Import CSS module as 'SignUpPage'
+import not_show from '../images/not_show.png';
+import show from '../images/show.png';
+import axios from 'axios';
 
 function clearForm(id, error_id, error) {
   if (id !== "") {
@@ -26,8 +26,7 @@ function submitForm() {
   if (email === "") {
     val = 0;
     clearForm("email", "error-email", "Enter your IITGOA Email");
-  }
-  else if (email.substring(email.length - 13) !== "@iitgoa.ac.in") {
+  } else if (email.substring(email.length - 13) !== "@iitgoa.ac.in") {
     clearForm("", "error-email", "Enter your IITGOA Email");
     val = 0;
   }
@@ -42,8 +41,7 @@ function submitForm() {
   if (confi_pass === "") {
     clearForm("confi-pass", "error-confi-pass", "Confirm your Password");
     val = 0;
-  }
-  else if (password !== confi_pass) {
+  } else if (password !== confi_pass) {
     clearForm("confi-pass", "error-confi-pass", "Password is not matching");
     val = 0;
   }
@@ -59,107 +57,111 @@ function switchPassword(id, id_img) {
   if (type.src === not_show) {
     document.getElementById(id).setAttribute('type', 'text');
     type.src = show;
-  }
-  else {
+  } else {
     document.getElementById(id).setAttribute('type', 'password');
     type.src = not_show;
   }
 }
 
-export default function Login(props) {
+export default function SignUp() {
   return (
-    <div className="container">
-      <div className="left-section">
-        <div className="content">
-          <h2>lorem ispum random text here for testing</h2>
-          <div className="graphics"></div>
+    <div className={SignUpPage.body}>
+      <div className={SignUpPage.container}>
+        <div className={SignUpPage['left-section']}>
+          <div className={SignUpPage.content}>
+            <h2>Lorem Ipsum random text here for testing</h2>
+            <div className={SignUpPage.graphics}></div>
+          </div>
         </div>
-      </div>
-      <div className="right-section">
-        <div className="signup-form">
-          <h2>Create Account</h2>
-          <form>
-            <input
-              id="email"
-              type="email"
-              placeholder="IITGOA Email"
-              required
-              onClick={() => clearError('error-email')}
-            />
-            <span className="error-message" id="error-email">
-              Email is required
-            </span>
-
-            <input
-              id="name"
-              type="text"
-              placeholder="Full Name"
-              required
-              onClick={() => clearError('error-name')}
-            />
-            <span className="error-message" id="error-name">
-              Full Name is required
-            </span>
-
-            <div className="password-container">
-              <input
-                type="password"
-                id="password"
-                placeholder="Password"
+        <div className={SignUpPage['right-section']}>
+          <div className={SignUpPage['signup-form']}>
+            <h2>Create Account</h2>
+            <form className={SignUpPage.form}>
+              <input 
+                id="email"
+                type="email"
+                placeholder="IITGOA Email"
                 required
-                onClick={() => clearError('error-pass')}
+                onClick={() => clearError('error-email')}
+                className={SignUpPage.input} // Ensure input SignUpPage are managed
               />
-              <button
-                type="button"
-                className="toggle-password"
-                onClick={() => switchPassword('password', 'switch-pass')}
-              >
-                <img
-                  id="switch-pass"
-                  src={not_show}
-                  alt="Password Visibility"
-                />
-              </button>
-            </div>
-            <span className="error-message" id="error-pass">
-              Password is required
-            </span>
+              <span className={SignUpPage['error-message']} id="error-email">
+                Email is required
+              </span>
 
-            <div className="password-container">
               <input
-                type="password"
-                id="confi-pass"
-                placeholder="Confirm Password"
+                id="name"
+                type="text"
+                placeholder="Full Name"
                 required
-                onClick={() => clearError('error-confi-pass')}
+                onClick={() => clearError('error-name')}
+                className={SignUpPage.input} // Ensure input SignUpPage are managed
               />
-              <button
-                type="button"
-                className="toggle-password"
-                onClick={() => switchPassword('confi-pass', 'switch-confi-pass')}
-              >
-                <img
-                  id="switch-confi-pass"
-                  src={not_show}
-                  alt="Password Visibility"
-                />
-              </button>
-            </div>
-            <span className="error-message" id="error-confi-pass">
-              Please confirm your password
-            </span>
+              <span className={SignUpPage['error-message']} id="error-name">
+                Full Name is required
+              </span>
 
-            <button type="button" className="submit-btn" onClick={submitForm}>
-              Create Account
-            </button>
-          </form>
-          <p>
-            Already Have a Account?
-            <Link to={"/login"}> Login</Link>
-          </p>
+              <div className={SignUpPage['password-container']}>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Password"
+                  required
+                  onClick={() => clearError('error-pass')}
+                  className={SignUpPage.input} // Ensure input SignUpPage are managed
+                />
+                <button
+                  type="button"
+                  className={SignUpPage['toggle-password']}
+                  onClick={() => switchPassword('password', 'switch-pass')}
+                >
+                  <img
+                    id="switch-pass"
+                    src={not_show}
+                    alt="Password Visibility"
+                  />
+                </button>
+              </div>
+              <span className={SignUpPage['error-message']} id="error-pass">
+                Password is required
+              </span>
+
+              <div className={SignUpPage['password-container']}>
+                <input
+                  type="password"
+                  id="confi-pass"
+                  placeholder="Confirm Password"
+                  required
+                  onClick={() => clearError('error-confi-pass')}
+                  className={SignUpPage.input} // Ensure input SignUpPage are managed
+                />
+                <button
+                  type="button"
+                  className={SignUpPage['toggle-password']}
+                  onClick={() => switchPassword('confi-pass', 'switch-confi-pass')}
+                >
+                  <img
+                    id="switch-confi-pass"
+                    src={not_show}
+                    alt="Password Visibility"
+                  />
+                </button>
+              </div>
+              <span className={SignUpPage['error-message']} id="error-confi-pass">
+                Please confirm your password
+              </span>
+
+              <button type="button" className={SignUpPage['submit-btn']} onClick={submitForm}>
+                Create Account
+              </button>
+            </form>
+            <p>
+              Already Have an Account?
+              <Link to={"/login"}> Login</Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>
   );
 }
-

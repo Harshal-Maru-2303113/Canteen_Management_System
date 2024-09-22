@@ -1,4 +1,4 @@
-body {
+.body {
   margin: 0;
   font-family: Arial, sans-serif;
   display: flex;
@@ -59,18 +59,18 @@ body {
   text-align: center;
 }
 
-.signup-form h2 {
+.signup-form .h2 {
   margin-bottom: 20px;
   font-size: 1.5em;
   color: #333333;
 }
 
-form {
+.form {
   display: flex;
   flex-direction: column;
 }
 
-form input {
+.form .input {
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #dddddd;
@@ -79,7 +79,7 @@ form input {
   width: 100%;
 }
 
-form input::placeholder {
+.form .input::placeholder {
   color: #aaaaaa;
 }
 

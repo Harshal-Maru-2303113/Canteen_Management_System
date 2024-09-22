@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import "../CSS/LoginPage.css";
+import LoginPage from "../CSS/LoginPage.module.css";
 import not_show from "../images/not_show.png";
 import show from "../images/show.png";
-import axios from 'axios'
+import axios from 'axios';
 
 function clearForm(id, error_id, error) {
   if (id !== "") {
@@ -35,13 +35,13 @@ function submitForm() {
   if (val === 1) {
     axios.post('http://localhost:5000/login', { email, password })
       .then(res => {
-        if (res.data.message == "Login successful") {
+        if (res.data.message === "Login successful") {
           document.getElementById("goto_home").click();
         }
-        else if (res.data.message == "Email not registered") {
+        else if (res.data.message === "Email not registered") {
           console.log("1");
         }
-        else if (res.data.message == "Incorrect password") {
+        else if (res.data.message === "Incorrect password") {
           console.log(2);
         }
       }
@@ -62,63 +62,60 @@ function switchPassword(id, id_img) {
   }
 }
 
-export default function Login(props) {
+export default function Login() {
   return (
-    <div className="container">
-      <div className="left-section">
-        <div className="content">
-          <h2>lorem ispum random text here for testing</h2>
-          <div className="graphics"></div>
+    <div className={LoginPage.body}>
+      <div className={LoginPage.container}>
+        <div className={LoginPage['left-section']}>
+          <div className={LoginPage.content}>
+            <h2>lorem ispum random text here for testing</h2>
+            <div className={LoginPage.graphics}></div>
+          </div>
         </div>
-      </div>
-      <div className="right-section">
-        <div className="signup-form">
-          <h2>Login</h2>
-          <form>
-            <input
-              id="email"
-              type="email"
-              placeholder="IITGOA Email"
-              required
-              onClick={() => clearError("error-email")}
-            />
-            <span className="error-message" id="error-email">
-              Email is required
-            </span>
-
-            <div className="password-container">
-              <input
-                type="password"
-                id="password"
-                placeholder="Password"
+        <div className={LoginPage['right-section']}>
+          <div className={LoginPage['signup-form']}>
+            <h2 className={LoginPage.h2}>Login</h2>
+            <form className={LoginPage.form}>
+              <input className={LoginPage.input}
+                id="email"
+                type="email"
+                placeholder="IITGOA Email"
                 required
-                onClick={() => clearError("error-pass")}
+                onClick={() => clearError('error-email')}
               />
-              <button
-                type="button"
-                className="toggle-password"
-                onClick={() => switchPassword("password", "switch-pass")}
-              >
-                <img
-                  id="switch-pass"
-                  src={not_show}
-                  alt="Password Visibility"
-                />
-              </button>
-            </div>
-            <span className="error-message" id="error-pass">
-              Password is required
-            </span>
+              <span className={LoginPage['error-message']} id="error-email">
+                Email is required
+              </span>
 
-            <button type="button" className="submit-btn" onClick={submitForm}>
-              Login
-              <Link to={"/home"} id="goto_home"></Link>
-            </button>
-          </form>
-          <p>
-            Don't Have a Account?
-            <Link to={"/signup"}> Signup</Link>
-          </p>
+              <div className={LoginPage['password-container']}>
+                <input className={LoginPage.input}
+                  type="password"
+                  id="password"
+                  placeholder="Password"
+                  required
+                  onClick={() => clearError('error-pass')}
+                />
+                <button
+                  type="button"
+                  className={LoginPage['toggle-password']}
+                  onClick={() => switchPassword('password', 'switch-pass')}
+                >
+                  <img id="switch-pass" src={not_show} alt="Password Visibility" />
+                </button>
+              </div>
+              <span className={LoginPage['error-message']} id="error-pass">
+                Password is required
+              </span>
+
+              <button type="button" className={LoginPage['submit-btn']} onClick={submitForm}>
+                Login
+                <Link to="/home" id="goto_home"></Link>
+              </button>
+            </form>
+            <p>
+              Don't have an account? <Link to="/signup">Signup</Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>

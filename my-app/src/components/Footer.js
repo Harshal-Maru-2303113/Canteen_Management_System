@@ -1,12 +1,12 @@
 import React from "react";
-import "../CSS/Footer.css";
+import footer from "../CSS/Footer.module.css"; // Import the CSS module
 
 export default function Footer() {
   return (
     <>
-      <footer className="footer">
-        <div className="footer-container">
-          <div className="footer-column">
+      <footer className={footer.footer}>
+        <div className={footer['footer-container']}>
+          <div className={footer['footer-column']}>
             <h4>About Us</h4>
             <p>
               We are a company committed to providing the best services to our
@@ -14,7 +14,7 @@ export default function Footer() {
             </p>
           </div>
 
-          <div className="footer-column">
+          <div className={footer['footer-column']}>
             <h4>Quick Links</h4>
             <ul>
               <li>
@@ -32,7 +32,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="footer-column">
+          <div className={footer['footer-column']}>
             <h4>Contact Us</h4>
             <ul>
               <li>Email: info@example.com</li>
@@ -41,9 +41,9 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="footer-column">
+          <div className={footer['footer-column']}>
             <h4>Follow Us</h4>
-            <div className="social-icons">
+            <div className={footer['social-icons']}>
               <a href="#">
                 <img src="logo512.png" alt="Facebook" />
               </a>
@@ -60,7 +60,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="footer-bottom">
+        <div className={footer['footer-bottom']}>
           <p>&copy; 2024 Your Company. All Rights Reserved.</p>
         </div>
       </footer>
