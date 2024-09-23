@@ -12,7 +12,7 @@ app.use(cookiePaser());
 const cms = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "kartik",
+  password: "Harshal@2005",
   database: "cms"
 })
 

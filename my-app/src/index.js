@@ -2,16 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Login from "./components/LoginPage"
 import SignUpPage from './components/SignUpPage'
-import HomePage from './components/Homepage';
+import HomePage from './components/HomePage';
 import HeroPage from './components/HeroPage';
 import Footer from './components/Footer';
 import NavBar from './components/NavBar';
+import Cart from './components/Cart';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: [<NavBar />,<HeroPage />,<Footer />]
+  },
   {
     path: "/login",
     element: <Login />
@@ -25,9 +30,10 @@ const router = createBrowserRouter([
     element: [<NavBar />,<HomePage />,<Footer />]
   },
   {
-    path: "/",
-    element: [<NavBar />,<HeroPage />,<Footer />]
+    path: "home/cart",
+    element: [<NavBar />,<Cart />,<Footer />]
   }
+  
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
