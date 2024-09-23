@@ -11,6 +11,8 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import ProfilePage from './components/ProfilePage';
+import PastOrder from './components/PastOrder';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,14 @@ const router = createBrowserRouter([
   {
     path: "home/cart",
     element: [<NavBar />,<Cart />,<Footer />]
+  },
+  {
+    path: "/profile",
+    element: [<NavBar />,<ProfilePage />,<Footer />]
+  },
+  {
+    path: "/pastorder",
+    element: [<NavBar />,<PastOrder />,<Footer />]
   }
   
 ]);
