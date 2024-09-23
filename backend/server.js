@@ -1,10 +1,13 @@
 const mysql = require('mysql2')
 const express = require('express');
 const cors = require('cors');
-const app = express();
+const jwt = require('jsonwebtoken');
+const cookiePaser = require('cookie-parser');
 
-app.use(cors());
+const app = express();
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(express.json());
+app.use(cookiePaser());
 
 const cms = mysql.createConnection({
   host: "localhost",
@@ -33,6 +36,13 @@ app.post('/login', (req, res) => {
         res.json({ message: "Email not registered" });
       }
       else if (results[0].password == values[1]) {
+        const token = jwt.sign({
+          id: values[0]
+        }, "secret");
+        res.cookie('jwt', token, {
+          httpOnly: true,
+          maxAge: 24 * 60 * 60 * 1000
+        })
         res.json({ message: 'Login successful' });
       }
       else {
@@ -55,8 +65,31 @@ app.post('/signup', (req, res) => {
     else console.log(results);
   });
 }
-
 );
+
+app.get('/user', (req, res) => {
+  if (req.cookies == '') {
+    return res.json({ message: 'unauthenticated' });
+  }
+  const cookie = req.cookies['jwt'];
+  const claims = jwt.verify(cookie, 'secret');
+  if (!claims) {
+    return res.json({ message: 'unauthenticated' });
+  }
+  cms.query(`SELECT * FROM User where email = ?`, values[0], (error, results) => {
+    if (error) console.log(error);
+    else {
+      return res.send(results[0]);
+    }
+  }
+  )
+})
+
+app.post('/logout', (req, res) => {
+  res.cookie('jwt', '', {
+    maxAge: 0
+  })
+})
 
 app.listen(5000, () => {
   console.log("Backend started")

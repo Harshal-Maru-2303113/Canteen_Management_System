@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Login from "./components/LoginPage"
 import SignUpPage from './components/SignUpPage'
-import HomePage from './components/HomePage';
+import HomePage from './components/Homepage';
 import HeroPage from './components/HeroPage';
 import Footer from './components/Footer';
 import NavBar from './components/NavBar';

@@ -33,7 +33,9 @@ function submitForm() {
     val = 0;
   }
   if (val === 1) {
-    axios.post('http://localhost:5000/login', { email, password })
+    axios.post('http://localhost:5000/login', { email, password },{
+      withCredentials: 'include'
+    })
       .then(res => {
         if (res.data.message === "Login successful") {
           document.getElementById("goto_home").click();
