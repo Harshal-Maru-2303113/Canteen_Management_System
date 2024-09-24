@@ -1,0 +1,7 @@
+black rgb(7, 14, 19)
+light black rgb(24, 48, 64)
+orange rgb(242, 79, 9)
+
+dark orange rgb(191, 54, 18)
+
+red rgb(140, 33, 22)

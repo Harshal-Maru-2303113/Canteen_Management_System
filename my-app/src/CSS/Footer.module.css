@@ -1,13 +1,13 @@
-
-
+/* Main content area */
 .content {
     flex: 1;
     padding: 2rem;
     text-align: center;
 }
 
+/* Footer styles */
 .footer {
-    background-color: #333;
+    background-color: rgb(7, 14, 19); /* Dark background matching navbar */
     color: white;
     padding: 2rem 0;
     text-align: center;
@@ -23,53 +23,93 @@
     padding: 1rem;
 }
 
+/* Footer column titles */
 .footer-column h4 {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     margin-bottom: 1rem;
+    color: rgb(242, 79, 9); /* Orange highlight for headings */
 }
 
+/* Footer column text */
 .footer-column p {
-    font-size: 0.9rem;
+    font-size: 1rem;
     line-height: 1.5;
+    margin: 0.5rem 0;
+    color: white; /* White for readability */
 }
 
+/* Footer lists */
 .footer-column ul {
     list-style: none;
+    padding: 0;
 }
 
+/* Footer list items */
 .footer-column ul li {
     margin: 0.5rem 0;
+    font-size: 0.95rem;
+    color: white; /* White text for consistency */
 }
 
+/* Footer links */
 .footer-column ul li a {
     color: white;
     text-decoration: none;
-    transition: color 0.3s;
+    transition: color 0.3s, transform 0.3s;
 }
 
+/* Link hover effect */
 .footer-column ul li a:hover {
-    color: #ffbf00;
+    color: rgb(242, 79, 9); /* Orange hover effect matching navbar */
+    transform: translateY(-3px); /* Subtle lift on hover */
 }
 
+/* Social icons */
 .social-icons a {
     margin: 0 0.5rem;
     display: inline-block;
+    transition: transform 0.3s, filter 0.3s;
 }
 
+/* Social icon images */
 .social-icons img {
-    width: 24px;
-    height: 24px;
-    filter: brightness(0) invert(1); /* Makes icons white */
+    width: 30px;
+    height: 30px;
+    filter: brightness(0) invert(1); /* White icons */
+    transition: transform 0.3s;
 }
 
+/* Hover effect for social icons */
+.social-icons a:hover img {
+    transform: scale(1.2); /* Slight zoom-in on hover */
+    filter: brightness(1); /* Brightness change */
+}
+
+/* Footer bottom section */
 .footer-bottom {
     margin-top: 1.5rem;
     font-size: 0.9rem;
+    color: white; /* White text for the footer bottom */
 }
 
+/* Responsiveness for mobile screens */
 @media (max-width: 768px) {
     .footer-container {
         flex-direction: column;
         align-items: center;
+        text-align: center;
+    }
+
+    .social-icons img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .footer-column h4 {
+        font-size: 1.2rem;
+    }
+
+    .footer-column ul li {
+        font-size: 0.9rem;
     }
 }

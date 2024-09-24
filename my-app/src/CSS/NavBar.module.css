@@ -1,84 +1,144 @@
-
-
 .navbar {
-    background-color: #333;
-    color: white;
-    padding: 2dvh 3dvh;
+    display: flex;
+    background-color: rgb(7, 14, 19);
+    height: 82px;
+    width: 100%;
+    padding: 8px;
 }
 
-.navbar-container {
+.navbar-left-side {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
+    width: 35%;
+    color: rgb(242, 79, 9);
 }
 
-.Logo {
-    font-size: 2dvh;
-    color: white;
-    text-decoration: none;
-}
-
-.menu {
+.navbar-right-side {
+    width: 65%;
     display: flex;
-    gap: 1.5rem;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
 }
 
-.menu a {
-    color: white;
-    text-decoration: none;
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    transition: background 0.3s;
+.navbar-top-right-logo {
+    width: 60px;
+    height: 62px;
+    margin: 3px;
+    border: 2px solid white;
+    background-image: url(../images/iit-goa-logo.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
 }
 
-.menu a:hover {
-    background-color: #555;
-    border-radius: 5px;
+.navbar-top-right-logo-text {
+    margin: 10px;
+    font-size: xx-large;
 }
 
-.login {
-    background-color: #f0a500;
+.navbar-right-side-aboutUs,
+.navbar-right-side-login,
+.navbar-right-side-signup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 550;
+    height: 80%;
+    color: rgb(242, 79, 9);
+    padding: 10px;
+    margin: 5px;
+    border-radius: 20px;
+    transition: 0.2s ease-in-out;
+}
+
+.navbar-right-side-aboutUs:hover,
+.navbar-right-side-login:hover,
+.navbar-right-side-signup:hover {
     color: black;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    transition: background 0.3s;
+    background-color: rgb(242, 79, 9);
 }
 
-.login:hover {
-    background-color: #ffbf00;
-}
-
-.hamburger {
+.navbar-right-side-,
+.responsive-right-side {
     display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 5px;
 }
 
-.hamburger span {
-    display: block;
-    width: 25px;
-    height: 3px;
+.hamburger-bar {
     background-color: white;
+    height: 6px;
+    width: 40px;
+    margin: 4px;
+    padding: 4px;
+    transition: all 0.4s ease;
 }
 
-@media (max-width: 768px) {
-    .menu {
+/* Animation for the dropdown menu */
+.hamburger-dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 80px;
+    right: 10px;
+    background-color: rgb(7, 14, 19);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.4s ease;
+}
+
+.hamburger-dropdown-menu div {
+    margin: 5px 0;
+    padding: 10px;
+    width: 100px;
+    text-align: center;
+    font-size: 18px;
+    color: rgb(242, 79, 9);
+    border-radius: 10px;
+}
+
+.hamburger-dropdown-menu div:hover {
+    color: black;
+    background-color: rgb(242, 79, 9);
+}
+
+.hamburger-dropdown-menu.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.hamburger-icon.open .hamburger-bar:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.hamburger-icon.open .hamburger-bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-icon.open .hamburger-bar:nth-child(3) {
+    transform: rotate(-45deg) translate(10px, -10px);
+}
+
+@media only screen and (max-width: 750px) {
+    .navbar-right-side {
         display: none;
+    }
+    .responsive-right-side {
+        display: flex;
+        width: 10%;
         flex-direction: column;
-        background-color: #333;
-        position: absolute;
-        top: 60px;
-        right: 0;
-        width: 200px;
-        border-radius: 5px;
+        justify-content: center;
+        align-items: center;
     }
-
-    .menu.show {
-        display: flex;
-    }
-
-    .hamburger {
-        display: flex;
+    .navbar-left-side {
+        width: 90%;
     }
 }
