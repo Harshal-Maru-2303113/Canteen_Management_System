@@ -1,7 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Profilepage from '../CSS/ProfilePage.module.css'; // Keeping the original import name
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function ProfilePage() {
+  let Navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.length !== 1 || localStorage.getItem('val') !== '1') {
+      return Navigate('/login');
+    }
+    else {
+      axios.post('http://localhost:5000/login', {}, {
+        withCredentials: 'include'
+      })
+        .then(res => {
+          if (res.data.message !== "") {
+            return Navigate('/login');
+          }
+        })
+        .catch(err => {
+          return Navigate('/login');
+        });
+    }
+  });
   const editName = () => {
     // Function to handle editing name
     console.log('Edit Name clicked');
@@ -13,8 +34,9 @@ export default function ProfilePage() {
   };
 
   const signOut = () => {
-    // Function to handle sign out
-    console.log('Sign Out clicked');
+    axios.post("http://localhost:5000/logout", {}, { withCredentials: 'include' })
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
   };
 
   return (

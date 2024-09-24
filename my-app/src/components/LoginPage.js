@@ -1,70 +1,69 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoginPage from "../CSS/LoginPage.module.css";
 import not_show from "../images/not_show.png";
 import show from "../images/show.png";
 import axios from 'axios';
 
-function clearForm(id, error_id, error) {
-  if (id !== "") {
-    document.getElementById(id).value = "";
-  }
-  document.getElementById(error_id).style.display = "block";
-  document.getElementById(error_id).innerHTML = error;
-}
-
-function clearError(error_id) {
-  document.getElementById(error_id).style.display = "none";
-  document.getElementById(error_id).innerHTML = "";
-}
-
-function submitForm() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  let val = 1;
-  if (email === "") {
-    val = 0;
-    clearForm("email", "error-email", "Enter your IITGOA Email");
-  } else if (email.substring(email.length - 13) !== "@iitgoa.ac.in") {
-    clearForm("", "error-email", "Enter your IITGOA Email");
-    val = 0;
-  }
-  if (password === "") {
-    clearForm("password", "error-pass", "Enter a Password");
-    val = 0;
-  }
-  if (val === 1) {
-    axios.post('http://localhost:5000/login', { email, password },{
-      withCredentials: 'include'
-    })
-      .then(res => {
-        if (res.data.message === "Login successful") {
-          document.getElementById("goto_home").click();
-        }
-        else if (res.data.message === "Email not registered") {
-          console.log("1");
-        }
-        else if (res.data.message === "Incorrect password") {
-          console.log(2);
-        }
-      }
-
-      )
-      .catch(err => console.log(err));
-  }
-}
-
-function switchPassword(id, id_img) {
-  let type = document.getElementById(id_img);
-  if (type.src === not_show) {
-    document.getElementById(id).setAttribute("type", "text");
-    type.src = show;
-  } else {
-    document.getElementById(id).setAttribute("type", "password");
-    type.src = not_show;
-  }
-}
-
 export default function Login() {
+  let Navigate = useNavigate();
+  function clearForm(id, error_id, error) {
+    if (id !== "") {
+      document.getElementById(id).value = "";
+    }
+    document.getElementById(error_id).style.display = "block";
+    document.getElementById(error_id).innerHTML = error;
+  }
+  
+  function clearError(error_id) {
+    document.getElementById(error_id).style.display = "none";
+    document.getElementById(error_id).innerHTML = "";
+  }
+  
+  function submitForm() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    let val = 1;
+    if (email === "") {
+      val = 0;
+      clearForm("email", "error-email", "Enter your IITGOA Email");
+    } else if (email.substring(email.length - 13) !== "@iitgoa.ac.in") {
+      clearForm("", "error-email", "Enter your IITGOA Email");
+      val = 0;
+    }
+    if (password === "") {
+      clearForm("password", "error-pass", "Enter a Password");
+      val = 0;
+    }
+    if (val === 1) {
+      axios.post('http://localhost:5000/login', { email, password },{
+        withCredentials: 'include'
+      })
+        .then(res => {
+          if (res.data.message === "Login successful") {
+            localStorage.setItem('val','1');
+            return Navigate('/home');
+            }
+          else if (res.data.message === "Email not registered") {
+          }
+          else if (res.data.message === "Incorrect password") {
+          }
+        }
+  
+        )
+        .catch(err => console.log(err));
+    }
+  }
+  
+  function switchPassword(id, id_img) {
+    let type = document.getElementById(id_img);
+    if (type.src === not_show) {
+      document.getElementById(id).setAttribute("type", "text");
+      type.src = show;
+    } else {
+      document.getElementById(id).setAttribute("type", "password");
+      type.src = not_show;
+    }
+  }
   return (
     <div className={LoginPage.body}>
       <div className={LoginPage.container}>
@@ -111,7 +110,7 @@ export default function Login() {
 
               <button type="button" className={LoginPage['submit-btn']} onClick={submitForm}>
                 Login
-                <Link to="/home" id="goto_home"></Link>
+                {/* <Link to="/home" id="goto_home"></Link> */}
               </button>
             </form>
             <p>

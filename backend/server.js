@@ -12,7 +12,7 @@ app.use(cookiePaser());
 const cms = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "Harshal@2005",
+  password: "kartik",
   database: "cms"
 })
 
@@ -68,9 +68,7 @@ app.post('/signup', (req, res) => {
 );
 
 app.get('/user', (req, res) => {
-  if (req.cookies == '') {
-    return res.json({ message: 'unauthenticated' });
-  }
+  try{
   const cookie = req.cookies['jwt'];
   const claims = jwt.verify(cookie, 'secret');
   if (!claims) {
@@ -82,18 +80,23 @@ app.get('/user', (req, res) => {
       return res.send(results[0]);
     }
   }
-  )
-})
-
-
+  )}
+  catch(e){
+    res.json({message: 'no session'});
+  }
+});
 
 app.post('/logout', (req, res) => {
+  console.log(req.cookies);
   res.cookie('jwt', '', {
+    httpOnly: true,
     maxAge: 0
-  })
-})
+  });
+  localStorage.setItem('value',0);
+  res.json({ message: 'Logged out successfully' });
+});
 
 
 app.listen(5000, () => {
   console.log("Backend started")
-})
+});

@@ -1,10 +1,28 @@
-import React from "react";
+import React,{useEffect} from "react";
 import Heropage from "../CSS/HeroPage.module.css"; // Import the CSS module
-import { useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function HeroPage() {
- 
+  let Navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.length !== 1 || localStorage.getItem('val') !== '1') {
+      return Navigate('/login');
+    }
+    else {
+      axios.post('http://localhost:5000/login', {}, {
+        withCredentials: 'include'
+      })
+        .then(res => {
+          if (res.data.message !== "") {
+            return Navigate('/login');
+          }
+        })
+        .catch(err => {
+          return Navigate('/login');
+        });
+    }
+  });
   return (
     <>
       <section className={Heropage.hero}>
