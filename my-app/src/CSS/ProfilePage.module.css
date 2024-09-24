@@ -1,5 +1,5 @@
 
-body {
+.body {
     font-family: 'Arial', sans-serif;
     background-color: #f0f4f8;
     display: flex;
@@ -52,7 +52,7 @@ body {
     transition: transform 0.3s ease-in-out;
 }
 
-.profile-pic img {
+.profile-pic .img {
     width: 100%;
     height: auto;
     display: block;
@@ -66,7 +66,7 @@ body {
     margin-left: 20px;
 }
 
-.profile-name h2 {
+.profile-name .h2 {
     color: #333;
     font-size: 1.8rem;
     font-weight: 600;
@@ -92,12 +92,12 @@ body {
     background-color: #eef3f8;
 }
 
-label {
+.label {
     font-weight: bold;
     color: #555;
 }
 
-span {
+.span {
     color: #777;
 }
 
