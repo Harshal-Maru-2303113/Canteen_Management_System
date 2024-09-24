@@ -33,7 +33,7 @@ const router = createBrowserRouter([
     element: [<NavBar />,<HomePage />,<Footer />]
   },
   {
-    path: "home/cart",
+    path: "/cart",
     element: [<NavBar />,<Cart />,<Footer />]
   },
   {

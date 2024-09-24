@@ -85,11 +85,14 @@ app.get('/user', (req, res) => {
   )
 })
 
+
+
 app.post('/logout', (req, res) => {
   res.cookie('jwt', '', {
     maxAge: 0
   })
 })
+
 
 app.listen(5000, () => {
   console.log("Backend started")

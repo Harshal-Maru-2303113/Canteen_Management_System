@@ -1,7 +1,10 @@
 import React from "react";
 import Heropage from "../CSS/HeroPage.module.css"; // Import the CSS module
+import { useEffect } from "react";
+import axios from "axios";
 
 export default function HeroPage() {
+ 
   return (
     <>
       <section className={Heropage.hero}>
