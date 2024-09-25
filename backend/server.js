@@ -12,7 +12,7 @@ app.use(cookiePaser());
 const cms = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "Harshal@2005",
+  password: "kartik",
   database: "cms"
 })
 
@@ -28,8 +28,7 @@ app.post('/login', (req, res) => {
     req.body.email,
     req.body.password
   ]
-  console.log(`Received: ${values[0]}, ${values[1]}`);
-  cms.query(`SELECT * FROM User where email = ?`, values[0], (error, results) => {
+  cms.query(`SELECT * FROM users where email = ?`, values[0], (error, results) => {
     if (error) console.log(error);
     else {
       if (results == "") {
@@ -60,9 +59,11 @@ app.post('/signup', (req, res) => {
     req.body.password
   ]
   console.log(`Received: ${values[0]}, ${values[1]}`);
-  cms.query(`Insert into user(email,name,password) values(?,?,?)`, values, (error, results) => {
-    if (error) console.log(error);
-    else console.log(results);
+  cms.query(`Insert into users(user_email,user_name,user_password) values(?,?,?)`, values, (error, results) => {
+    if (error){
+      return res.json({ message: 'Email is already registered' });
+    }
+    res.json({ message: '' });
   });
 }
 );

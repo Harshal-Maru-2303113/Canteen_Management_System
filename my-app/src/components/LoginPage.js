@@ -13,12 +13,12 @@ export default function Login() {
     document.getElementById(error_id).style.display = "block";
     document.getElementById(error_id).innerHTML = error;
   }
-  
+
   function clearError(error_id) {
     document.getElementById(error_id).style.display = "none";
     document.getElementById(error_id).innerHTML = "";
   }
-  
+
   function submitForm() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -35,25 +35,24 @@ export default function Login() {
       val = 0;
     }
     if (val === 1) {
-      axios.post('http://localhost:5000/login', { email, password },{
+      axios.post('http://localhost:5000/login', { email, password }, {
         withCredentials: 'include'
       })
         .then(res => {
           if (res.data.message === "Login successful") {
-            localStorage.setItem('val','1');
             return Navigate('/home');
-            }
+          }
           else if (res.data.message === "Email not registered") {
           }
           else if (res.data.message === "Incorrect password") {
           }
         }
-  
+
         )
         .catch(err => console.log(err));
     }
   }
-  
+
   function switchPassword(id, id_img) {
     let type = document.getElementById(id_img);
     if (type.src === not_show) {
@@ -110,7 +109,6 @@ export default function Login() {
 
               <button type="button" className={LoginPage['submit-btn']} onClick={submitForm}>
                 Login
-                {/* <Link to="/home" id="goto_home"></Link> */}
               </button>
             </form>
             <p>

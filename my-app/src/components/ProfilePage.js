@@ -6,22 +6,17 @@ import { useNavigate } from 'react-router-dom';
 export default function ProfilePage() {
   let Navigate = useNavigate();
   useEffect(() => {
-    if (localStorage.length !== 1 || localStorage.getItem('val') !== '1') {
-      return Navigate('/login');
-    }
-    else {
-      axios.post('http://localhost:5000/login', {}, {
-        withCredentials: 'include'
-      })
-        .then(res => {
-          if (res.data.message !== "") {
-            return Navigate('/login');
-          }
-        })
-        .catch(err => {
+    axios.post('http://localhost:5000/login', {}, {
+      withCredentials: 'include'
+    })
+      .then(res => {
+        if (res.data.message !== "") {
           return Navigate('/login');
-        });
-    }
+        }
+      })
+      .catch(err => {
+        return Navigate('/login');
+      });
   });
   const editName = () => {
     // Function to handle editing name

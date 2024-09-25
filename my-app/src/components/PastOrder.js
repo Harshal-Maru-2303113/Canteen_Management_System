@@ -1,7 +1,23 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import styles from '../CSS/PastOrder.module.css'; // Using CSS Modules
 
 export default function PastOrder() {
+  let Navigate = useNavigate();
+  useEffect(() => {
+    axios.post('http://localhost:5000/login', {}, {
+      withCredentials: 'include'
+    })
+      .then(res => {
+        if (res.data.message !== "") {
+          return Navigate('/login');
+        }
+      })
+      .catch(err => {
+        return Navigate('/login');
+      });
+  });
   return (
     <div className={styles.body}>
       <div className={styles.container}>

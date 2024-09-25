@@ -3,67 +3,73 @@ import SignUpPage from '../CSS/SignUpPage.module.css'; // Import CSS module as '
 import not_show from '../images/not_show.png';
 import show from '../images/show.png';
 import axios from 'axios';
-
-function clearForm(id, error_id, error) {
-  if (id !== "") {
-    document.getElementById(id).value = "";
-  }
-  document.getElementById(error_id).style.display = "block";
-  document.getElementById(error_id).innerHTML = error;
-}
-
-function clearError(error_id) {
-  document.getElementById(error_id).style.display = "none";
-  document.getElementById(error_id).innerHTML = "";
-}
-
-function submitForm() {
-  const email = document.getElementById("email").value;
-  const name = document.getElementById("name").value;
-  const password = document.getElementById("password").value;
-  const confi_pass = document.getElementById("confi-pass").value;
-  let val = 1;
-  if (email === "") {
-    val = 0;
-    clearForm("email", "error-email", "Enter your IITGOA Email");
-  } else if (email.substring(email.length - 13) !== "@iitgoa.ac.in") {
-    clearForm("", "error-email", "Enter your IITGOA Email");
-    val = 0;
-  }
-  if (name === "") {
-    clearForm("name", "error-name", "Enter your Name");
-    val = 0;
-  }
-  if (password === "") {
-    clearForm("password", "error-pass", "Enter a Password");
-    val = 0;
-  }
-  if (confi_pass === "") {
-    clearForm("confi-pass", "error-confi-pass", "Confirm your Password");
-    val = 0;
-  } else if (password !== confi_pass) {
-    clearForm("confi-pass", "error-confi-pass", "Password is not matching");
-    val = 0;
-  }
-  if (val === 1) {
-    axios.post('http://localhost:5000/signup', { email, name, password })
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-  }
-}
-
-function switchPassword(id, id_img) {
-  let type = document.getElementById(id_img);
-  if (type.src === not_show) {
-    document.getElementById(id).setAttribute('type', 'text');
-    type.src = show;
-  } else {
-    document.getElementById(id).setAttribute('type', 'password');
-    type.src = not_show;
-  }
-}
+import { useNavigate } from 'react-router-dom';
 
 export default function SignUp() {
+  let Navigate = useNavigate();
+  function clearForm(id, error_id, error) {
+    if (id !== "") {
+      document.getElementById(id).value = "";
+    }
+    document.getElementById(error_id).style.display = "block";
+    document.getElementById(error_id).innerHTML = error;
+  }
+  
+  function clearError(error_id) {
+    document.getElementById(error_id).style.display = "none";
+    document.getElementById(error_id).innerHTML = "";
+  }
+  
+  function submitForm() {
+    const email = document.getElementById("email").value;
+    const name = document.getElementById("name").value;
+    const password = document.getElementById("password").value;
+    const confi_pass = document.getElementById("confi-pass").value;
+    let val = 1;
+    if (email === "") {
+      val = 0;
+      clearForm("email", "error-email", "Enter your IITGOA Email");
+    } else if (email.substring(email.length - 13) !== "@iitgoa.ac.in") {
+      clearForm("", "error-email", "Enter your IITGOA Email");
+      val = 0;
+    }
+    if (name === "") {
+      clearForm("name", "error-name", "Enter your Name");
+      val = 0;
+    }
+    if (password === "") {
+      clearForm("password", "error-pass", "Enter a Password");
+      val = 0;
+    }
+    if (confi_pass === "") {
+      clearForm("confi-pass", "error-confi-pass", "Confirm your Password");
+      val = 0;
+    } else if (password !== confi_pass) {
+      clearForm("confi-pass", "error-confi-pass", "Password is not matching");
+      val = 0;
+    }
+    if (val === 1) {
+      axios.post('http://localhost:5000/signup', { email, name, password })
+        .then(res => {
+          if(res.data.message){
+            return console.log(res.data.message);
+          }
+          return Navigate('/login');
+        })
+        .catch(err => console.log(err));
+    }
+  }
+  
+  function switchPassword(id, id_img) {
+    let type = document.getElementById(id_img);
+    if (type.src === not_show) {
+      document.getElementById(id).setAttribute('type', 'text');
+      type.src = show;
+    } else {
+      document.getElementById(id).setAttribute('type', 'password');
+      type.src = not_show;
+    }
+  }
   return (
     <div className={SignUpPage.body}>
       <div className={SignUpPage.container}>
