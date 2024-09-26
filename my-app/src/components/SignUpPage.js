@@ -51,8 +51,9 @@ export default function SignUp() {
     if (val === 1) {
       axios.post('http://localhost:5000/signup', { email, name, password })
         .then(res => {
-          if(res.data.message){
-            return console.log(res.data.message);
+          const message = res.data.message;
+          if(message){
+            return clearForm("email", "error-email", message);
           }
           return Navigate('/login');
         })

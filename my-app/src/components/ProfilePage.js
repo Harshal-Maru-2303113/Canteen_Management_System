@@ -1,23 +1,22 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import Profilepage from '../CSS/ProfilePage.module.css'; // Keeping the original import name
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 export default function ProfilePage() {
   let Navigate = useNavigate();
+  var email;
   useEffect(() => {
-    axios.post('http://localhost:5000/login', {}, {
-      withCredentials: 'include'
+    axios.get('http://localhost:5000/user',{
+      withCredentials: true
     })
-      .then(res => {
-        if (res.data.message !== "") {
-          return Navigate('/login');
-        }
-      })
-      .catch(err => {
-        return Navigate('/login');
-      });
-  });
+    .then(res => {
+      email = res.data.email;
+      if(email === "")  return Navigate('/login');
+    })
+    .catch(err => console.log(err));
+  },[Navigate]);
+
   const editName = () => {
     // Function to handle editing name
     console.log('Edit Name clicked');
@@ -29,9 +28,11 @@ export default function ProfilePage() {
   };
 
   const signOut = () => {
-    axios.post("http://localhost:5000/logout", {}, { withCredentials: 'include' })
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+    axios.get('http://localhost:5000/logout',{
+      withCredentials: "include",
+    })
+    .then(res => Navigate('/'))
+    .catch(err => Navigate('/'));
   };
 
   return (

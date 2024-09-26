@@ -1,25 +1,23 @@
-import React, { useEffect } from "react";
+import React,{useEffect} from "react";
 import homepage from "../CSS/HomePage.module.css";
 import MenuCardCarousel from "./MenuCardCarousel";
 import PrevOrderCarousel from "./PrevOrderCarousel";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
   let Navigate = useNavigate();
+  var email;
   useEffect(() => {
-    axios.post('http://localhost:5000/login', {}, {
-      withCredentials: 'include'
+    axios.get('http://localhost:5000/user',{
+      withCredentials: true
     })
-      .then(res => {
-        if (res.data.message !== "") {
-          return Navigate('/login');
-        }
-      })
-      .catch(err => {
-        return Navigate('/login');
-      });
-  });
+    .then(res => {
+      email = res.data.email;
+      if(email === "")  return Navigate('/login');
+    })
+    .catch(err => console.log(err));
+  },[Navigate]);
   return (
     <div className={homepage.mainHomepageContainer}>
       <MenuCardCarousel />

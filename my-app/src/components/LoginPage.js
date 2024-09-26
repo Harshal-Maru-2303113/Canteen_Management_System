@@ -6,6 +6,7 @@ import axios from 'axios';
 
 export default function Login() {
   let Navigate = useNavigate();
+  
   function clearForm(id, error_id, error) {
     if (id !== "") {
       document.getElementById(id).value = "";
@@ -35,21 +36,22 @@ export default function Login() {
       val = 0;
     }
     if (val === 1) {
-      axios.post('http://localhost:5000/login', { email, password }, {
-        withCredentials: 'include'
+      axios.post("http://localhost:5000/login",{email,password},{
+        withCredentials: "include"
       })
-        .then(res => {
-          if (res.data.message === "Login successful") {
-            return Navigate('/home');
+      .then(res => {
+        const message = res.data.message;
+        if(message){
+          if(message === "Incorrect Password"){
+            return clearForm("password", "error-pass", message);
           }
-          else if (res.data.message === "Email not registered") {
-          }
-          else if (res.data.message === "Incorrect password") {
+          if(message === "Email is not registered"){
+            return Navigate('/signup');
           }
         }
-
-        )
-        .catch(err => console.log(err));
+        return Navigate('/home');
+      })
+      .catch(err => console.log(err));
     }
   }
 
@@ -63,6 +65,7 @@ export default function Login() {
       type.src = not_show;
     }
   }
+
   return (
     <div className={LoginPage.body}>
       <div className={LoginPage.container}>

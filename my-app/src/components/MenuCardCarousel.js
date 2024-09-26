@@ -1,23 +1,21 @@
-import React, { useRef, useState, useEffect } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import React, { useRef, useState, useEffect} from "react";
 import menucard from "../CSS/MenuCardCarousel.module.css";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function MenuCardCarousel() {
   let Navigate = useNavigate();
+  var email;
   useEffect(() => {
-    axios.post('http://localhost:5000/login', {}, {
-      withCredentials: 'include'
+    axios.get('http://localhost:5000/user',{
+      withCredentials: true
     })
-      .then(res => {
-        if (res.data.message !== "") {
-          return Navigate('/login');
-        }
-      })
-      .catch(err => {
-        return Navigate('/login');
-      });
-  });
+    .then(res => {
+      email = res.data.email;
+      if(email === "")  return Navigate('/login');
+    })
+    .catch(err => console.log(err));
+  },[Navigate]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const inputsRef = useRef([]);
 

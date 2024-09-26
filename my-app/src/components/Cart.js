@@ -1,7 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from '../CSS/Cart.module.css';
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Cart = () => {
+  let Navigate = useNavigate();
+  var email;
+  useEffect(() => {
+    axios.get('http://localhost:5000/user',{
+      withCredentials: true
+    })
+    .then(res => {
+      email = res.data.email;
+      if(email === "")  return Navigate('/login');
+    })
+    .catch(err => console.log(err));
+  },[Navigate]);
   const [cart, setCart] = useState({
     fastFood: { burger: 0, pizza: 0, fries: 0 },
     beverage: { coke: 0, juice: 0, water: 0 },
