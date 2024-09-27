@@ -16,6 +16,8 @@ const Cart = () => {
     })
     .catch(err => console.log(err));
   },[Navigate]);
+
+  
   const [cart, setCart] = useState({
     fastFood: { burger: 0, pizza: 0, fries: 0 },
     beverage: { coke: 0, juice: 0, water: 0 },

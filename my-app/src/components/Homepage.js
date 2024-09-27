@@ -1,7 +1,5 @@
 import React,{useEffect} from "react";
 import homepage from "../CSS/HomePage.module.css";
-import MenuCardCarousel from "./MenuCardCarousel";
-import PrevOrderCarousel from "./PrevOrderCarousel";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 

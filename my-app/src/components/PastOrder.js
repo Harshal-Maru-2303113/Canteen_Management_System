@@ -16,6 +16,8 @@ export default function PastOrder() {
     })
     .catch(err => console.log(err));
   },[Navigate]);
+
+  
   return (
     <div className={styles.body}>
       <div className={styles.container}>
