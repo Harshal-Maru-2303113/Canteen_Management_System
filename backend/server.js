@@ -95,15 +95,13 @@ app.get('/cart',(req,res) => {
   var take_query = "SELECT * FROM category";
   cms.query(take_query,(err,tables) => {
     var menu = {
-      category : []
     };
     const total_types = tables.length;
     for(let i = 0; i < total_types; i++){
       const item = tables[i].item_type;
-      menu['category'].push(item);
       take_query = `SELECT * FROM ${item}`;
       cms.query(take_query,(err,items) => {
-        menu.item = items;
+        menu[`${item}`] = items;
         if (i === total_types-1) {
           return res.json(menu);
         }

@@ -4,142 +4,113 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Cart = () => {
-  let Navigate = useNavigate();
-  const [email,setemail] = useState("");
-  const [menu,setmenu] = useState({});
+  const Navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [menu, setMenu] = useState({});
+  const [cart, setCart] = useState({});
+  const [open, setOpen] = useState({ summary: 0 });
 
   useEffect(() => {
-    axios.get('http://localhost:5000/user',{
+    axios.get('http://localhost:5000/user', {
       withCredentials: "include"
     })
-    .then(res => {
-      const getemail = res.data.email;
-      if(getemail === "")  return Navigate('/login');
-      setemail(getemail);
-    })
-    .catch(err => console.log(err));
-  },[Navigate]);
+      .then(res => {
+        const getEmail = res.data.email;
+        if (getEmail === "") return Navigate('/login');
+        setEmail(getEmail);
+        axios.get('http://localhost:5000/cart', {
+          withCredentials: "include"
+        })
+          .then(res => {
+            setMenu(res.data);
+            initialize(res.data);
+          })
+          .catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
+  }, [Navigate]);
 
-  useEffect(() => {
-    axios.get('http://localhost:5000/cart',{
-      withCredentials: "include"
-    })
-    .then(res => {
-      setmenu(res.data);
-      console.log(res.data);
-    })
-    .catch(err => console.log(err));
-  },[Navigate]);
+  function initialize(menu) {
+    let tempCart = {};
+    let tempOpen = { summary: 0 };
+    Object.keys(menu).forEach((type) => {
+      tempCart[type] = {};
+      tempOpen[type] = 0;
+    });
+    setCart(tempCart);
+    setOpen(tempOpen);
+  }
 
-  const [cart, setCart] = useState({
-    fastFood: { burger: 0, pizza: 0, fries: 0 },
-    beverage: { coke: 0, juice: 0, water: 0 },
-    dishes: { pasta: 0, rice: 0, curry: 0 },
-    southIndian: { dosa: 0, idli: 0, vada: 0 }
-  });
-
-  const [isOpen, setIsOpen] = useState({
-    fastFood: false,
-    beverage: false,
-    dishes: false,
-    southIndian: false,
-    summary: false // New for the summary dropdown
-  });
-
-  const menuItems = {
-    fastFood: [
-      { id: 1, name: "Burger", price: 5.99, description: "Juicy beef patty with fresh vegetables" },
-      { id: 2, name: "Pizza", price: 8.99, description: "Classic Margherita with mozzarella and basil" },
-      { id: 3, name: "Fries", price: 2.99, description: "Crispy golden fries with seasoning" }
-    ],
-    beverage: [
-      { id: 1, name: "Coke", price: 1.99, description: "Refreshing cola drink" },
-      { id: 2, name: "Juice", price: 2.49, description: "Freshly squeezed orange juice" },
-      { id: 3, name: "Water", price: 0.99, description: "Pure mineral water" }
-    ],
-    dishes: [
-      { id: 1, name: "Pasta", price: 7.99, description: "Spaghetti with homemade tomato sauce" },
-      { id: 2, name: "Rice", price: 3.99, description: "Steamed Basmati rice" },
-      { id: 3, name: "Curry", price: 6.99, description: "Spicy vegetable curry" }
-    ],
-    southIndian: [
-      { id: 1, name: "Dosa", price: 4.99, description: "Crispy rice crepe with potato filling" },
-      { id: 2, name: "Idli", price: 3.99, description: "Steamed rice cakes with chutney" },
-      { id: 3, name: "Vada", price: 2.99, description: "Savory lentil donuts" }
-    ]
-  };
-
-  const toggleDropdown = (menu) => {
-    setIsOpen((prevState) => ({
-      ...prevState,
-      [menu]: !prevState[menu],
+  const toggleDropdown = (category) => {
+    setOpen(prevOpen => ({
+      ...prevOpen,
+      [category]: !prevOpen[category]
     }));
   };
 
   const incrementItem = (category, item) => {
-    setCart((prevCart) => ({
+    setCart(prevCart => ({
       ...prevCart,
       [category]: {
         ...prevCart[category],
-        [item]: prevCart[category][item] + 1,
-      },
+        [item]: (prevCart[category][item] || 0) + 1
+      }
     }));
   };
 
   const decrementItem = (category, item) => {
-    setCart((prevCart) => ({
-      ...prevCart,
-      [category]: {
-        ...prevCart[category],
-        [item]: Math.max(prevCart[category][item] - 1, 0),
-      },
-    }));
-  };
-
-  const calculateTotalItems = () => {
-    return Object.values(cart).reduce((total, category) => {
-      return total + Object.values(category).reduce((sum, count) => sum + count, 0);
-    }, 0);
-  };
-
-  const calculateTotalPrice = () => {
-    return Object.entries(cart).reduce((total, [category, items]) => {
-      const menuCategory = menuItems[category];
-      return total + Object.entries(items).reduce((sum, [item, count]) => {
-        const menuItem = menuCategory.find((i) => i.name.toLowerCase() === item);
-        return sum + menuItem.price * count;
-      }, 0);
-    }, 0).toFixed(2);
-  };
-
-  const renderSummaryItems = () => {
-    return Object.entries(cart).map(([category, items]) => {
-      return menuItems[category]
-        .filter((menuItem) => items[menuItem.name.toLowerCase()] > 0)
-        .map((menuItem) => (
-          <tr key={menuItem.id}>
-            <td>{menuItem.name}</td>
-            <td>{items[menuItem.name.toLowerCase()]}</td>
-            <td>${(menuItem.price * items[menuItem.name.toLowerCase()]).toFixed(2)}</td>
-          </tr>
-        ));
+    setCart(prevCart => {
+      const currentQuantity = prevCart[category][item] || 0;
+      const newQuantity = Math.max(currentQuantity - 1, 0);
+      return {
+        ...prevCart,
+        [category]: {
+          ...prevCart[category],
+          [item]: newQuantity
+        }
+      };
     });
   };
 
+  const calculateTotalItems = () => {
+    let sum = 0;
+    Object.values(cart).forEach(categoryItems => {
+      Object.values(categoryItems).forEach(quantity => {
+        sum += quantity;
+      });
+    });
+    return sum;
+  };
+
+  const calculateTotalPrice = () => {
+    let price = 0;
+    Object.keys(cart).forEach((category) => {
+      Object.keys(cart[category]).forEach((item) => {
+        const itemDetails = menu[category]?.find(i => i.item_name === item);
+        const itemPrice = itemDetails ? itemDetails.item_price : 0;
+        price += cart[category][item] * itemPrice;
+      });
+    });
+    return price;
+  };
+
+  // Render loading state if menu is not loaded yet
+  if (!menu || Object.keys(menu).length === 0) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className={styles.menuContainer}>
-      {Object.entries(menuItems).map(([category, items]) => (
+      {Object.keys(menu).map((category) => (
         <div key={category} className={styles.dropdown}>
           <button
             onClick={() => toggleDropdown(category)}
             className={styles.dropdownBtn}
           >
-            {category.charAt(0).toUpperCase() + category.slice(1)}
+            {category}
           </button>
           <div
-            className={`${styles.dropdownMenu} ${
-              isOpen[category] ? styles.showDropdown : styles.hideDropdown
-            }`}
+            className={`${styles.dropdownMenu} ${open[category] ? styles.showDropdown : styles.hideDropdown}`}
           >
             <table className={styles.menuTable}>
               <thead>
@@ -147,31 +118,31 @@ const Cart = () => {
                   <th>ID</th>
                   <th>Name</th>
                   <th>Price</th>
-                  <th>Description</th>
+                  <th>Availability</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {items.map((item) => (
-                  <tr key={item.id}>
-                    <td>{item.id}</td>
-                    <td>{item.name}</td>
-                    <td>${item.price.toFixed(2)}</td>
-                    <td>{item.description}</td>
+                {menu[category]?.map((item, index) => (
+                  <tr key={item.item_name}>
+                    <td>{index + 1}</td>
+                    <td>{item.item_name}</td>
+                    <td>${(item.item_price || 0).toFixed(2)}</td>
+                    <td>{item.item_status ? "Available" : "Not Available"}</td>
                     <td>
                       <div className={styles.actionGroup}>
                         <button
                           className={styles.removeBtn}
-                          onClick={() => decrementItem(category, item.name.toLowerCase())}
+                          onClick={() => decrementItem(category, item.item_name)}
                         >
                           -
                         </button>
                         <span className={styles.quantity}>
-                          {cart[category][item.name.toLowerCase()]}
+                          {cart[category]?.[item.item_name] || 0}
                         </span>
                         <button
                           className={styles.addBtn}
-                          onClick={() => incrementItem(category, item.name.toLowerCase())}
+                          onClick={() => incrementItem(category, item.item_name)}
                         >
                           +
                         </button>
@@ -184,21 +155,17 @@ const Cart = () => {
           </div>
         </div>
       ))}
-
-      {/* Summary Card */}
-      <div className={styles.summaryCard}>
+      {<div className={styles.summaryCard}>
         <button
           onClick={() => toggleDropdown("summary")}
           className={styles.summaryToggleBtn}
         >
-          {isOpen.summary
+          {open.summary
             ? `Cart Summary - ${calculateTotalItems()} items`
             : `Total: ${calculateTotalItems()} items, $${calculateTotalPrice()}`}
         </button>
         <div
-          className={`${styles.summaryDropdown} ${
-            isOpen.summary ? styles.showDropdown : styles.hideDropdown
-          }`}
+          className={`${styles.summaryDropdown} ${open.summary ? styles.showDropdown : styles.hideDropdown}`}
         >
           <table className={styles.summaryTable}>
             <thead>
@@ -208,13 +175,29 @@ const Cart = () => {
                 <th>Total Price</th>
               </tr>
             </thead>
-            <tbody>{renderSummaryItems()}</tbody>
+            <tbody>
+              {Object.keys(cart).map((category) => (
+                Object.keys(cart[category]).map((item) => {
+                  const menuItem = menu[category].find(i => i.item_name === item);
+                  return (
+                    <tr key={item}>
+                      <td>{item}</td>
+                      <td>{cart[category][item]}</td>
+                      <td>
+                        ${cart[category][item] * (menuItem ? menuItem.item_price : 0)}
+                      </td>
+                    </tr>
+                  );
+                })
+              ))}
+            </tbody>
           </table>
           <div className={styles.summaryTotal}>
             <strong>Total: ${calculateTotalPrice()}</strong>
           </div>
         </div>
       </div>
+      }
     </div>
   );
 };
