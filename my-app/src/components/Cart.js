@@ -127,7 +127,7 @@ const Cart = () => {
                   <tr key={item.item_name}>
                     <td>{index + 1}</td>
                     <td>{item.item_name}</td>
-                    <td>${(item.item_price || 0).toFixed(2)}</td>
+                    <td>${item.item_price}</td>
                     <td>{item.item_status ? "Available" : "Not Available"}</td>
                     <td>
                       <div className={styles.actionGroup}>
@@ -198,6 +198,14 @@ const Cart = () => {
         </div>
       </div>
       }
+      <div className={styles.buttonContainer}>
+        <button className={styles.resetBtn}>
+          Reset
+        </button>
+        <button  className={styles.placeOrderBtn}>
+          Place Order
+        </button>
+      </div>
     </div>
   );
 };

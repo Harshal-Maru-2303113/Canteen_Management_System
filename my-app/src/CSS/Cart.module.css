@@ -1,340 +1,371 @@
 .menuContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    width: 95%;
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .dropdown {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 95%;
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.dropdown {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.dropdown:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.dropdownBtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 20px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background-color 0.3s ease;
+}
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end; /* Aligns buttons to the right */
+  margin-top: 20px; /* Adjusts spacing from the content above */
+}
+
+.resetBtn, .placeOrderBtn {
+  padding: 10px 20px;
+  margin-left: 10px; /* Space between buttons */
+  border: none;
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Transition effect */
+}
+
+.resetBtn {
+  background-color: #f44336; /* Red for reset */
+  color: white;
+}
+
+.resetBtn:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
+
+.placeOrderBtn {
+  background-color: #4CAF50; /* Green for place order */
+  color: white;
+}
+
+.placeOrderBtn:hover {
+  background-color: #388E3C; /* Darker green on hover */
+}
+
+.dropdownBtn:hover {
+  background-color: #45a049;
+}
+
+.dropdownMenu {
+  background-color: #f9f9f9;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.showDropdown {
+  max-height: 1000px;
+  opacity: 1;
+  transition: max-height 0.5s ease-in, opacity 0.3s ease;
+}
+
+.hideDropdown {
+  max-height: 0;
+  opacity: 0;
+}
+
+.menuTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 10px;
+}
+
+.menuTable th,
+.menuTable td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  vertical-align: middle;
+}
+
+.menuTable th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.menuTable tr:last-child td {
+  border-bottom: none;
+}
+
+.menuTable tr:hover {
+  background-color: #f5f5f5;
+}
+
+.actionGroup {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.addBtn,
+.removeBtn {
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.addBtn {
+  background-color: #4CAF50;
+}
+
+.removeBtn {
+  background-color: #f44336;
+}
+
+.addBtn:hover,
+.removeBtn:hover {
+  filter: brightness(110%);
+}
+
+.addBtn:active,
+.removeBtn:active {
+  transform: scale(0.95);
+}
+
+.quantity {
+  font-size: 16px;
+  font-weight: bold;
+  min-width: 30px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .menuContainer {
     width: 100%;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-  }
-  
-  .dropdown:hover {
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-  }
-  
-  .dropdownBtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 15px 20px;
-    font-size: 18px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    text-align: left;
-    transition: background-color 0.3s ease;
-  }
-  
-  .dropdownBtn:hover {
-    background-color: #45a049;
-  }
-  
-  .dropdownMenu {
-    background-color: #f9f9f9;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease-out, opacity 0.3s ease;
-    opacity: 0;
-  }
-  
-  .showDropdown {
-    max-height: 1000px;
-    opacity: 1;
-    transition: max-height 0.5s ease-in, opacity 0.3s ease;
-  }
-  
-  .hideDropdown {
-    max-height: 0;
-    opacity: 0;
-  }
-  
-  .menuTable {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    margin-top: 10px;
-  }
-  
-  .menuTable th,
-  .menuTable td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    vertical-align: middle;
-  }
-  
-  .menuTable th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 14px;
-  }
-  
-  .menuTable tr:last-child td {
-    border-bottom: none;
-  }
-  
-  .menuTable tr:hover {
-    background-color: #f5f5f5;
-  }
-  
-  .actionGroup {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-  }
-  
-  .addBtn,
-  .removeBtn {
-    color: white;
-    border: none;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    border-radius: 50%;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease, transform 0.1s ease;
-  }
-  
-  .addBtn {
-    background-color: #4CAF50;
-  }
-  
-  .removeBtn {
-    background-color: #f44336;
-  }
-  
-  .addBtn:hover,
-  .removeBtn:hover {
-    filter: brightness(110%);
-  }
-  
-  .addBtn:active,
-  .removeBtn:active {
-    transform: scale(0.95);
-  }
-  
-  .quantity {
-    font-size: 16px;
-    font-weight: bold;
-    min-width: 30px;
-    text-align: center;
-  }
-  
-  @media (max-width: 768px) {
-    .menuContainer {
-      width: 100%;
-      padding: 10px;
-    }
-  
-    .menuTable {
-      font-size: 14px;
-    }
-  
-    .menuTable th,
-    .menuTable td {
-      padding: 8px 10px;
-    }
-  
-    .menuTable th:nth-child(4),
-    .menuTable td:nth-child(4) {
-      display: none;
-    }
-  
-    .addBtn,
-    .removeBtn {
-      width: 24px;
-      height: 24px;
-      font-size: 16px;
-      user-select: none;
-    }
-  
-    .quantity {
-      font-size: 14px;
-      min-width: 24px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .menuTable th:nth-child(3),
-    .menuTable td:nth-child(3) {
-      display: none;
-    }
-  
-    .actionGroup {
-      flex-direction: column;
-      gap: 5px;
-    }
+    padding: 10px;
   }
 
-  .menuContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    width: 95%;
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .dropdownMenu {
-    background-color: #f9f9f9;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease-out, opacity 0.3s ease;
-    opacity: 0;
-  }
-  
-  .showDropdown {
-    max-height: 1000px;
-    opacity: 1;
-    transition: max-height 0.5s ease-in, opacity 0.3s ease;
-  }
-  
-  .hideDropdown {
-    max-height: 0;
-    opacity: 0;
-  }
-  /* Summary Card Styles */
-.summaryCard {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #f0f0f0;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-  }
-  
- /* Closed State Button - More Pronounced */
-.summaryToggleBtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 20px;
-    font-size: 20px;
-    font-weight: bold;
-    width: 100%;
-    text-align: center;
-    border: none;
-    cursor: pointer;
-    border-radius: 10px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .summaryToggleBtn:hover {
-    background-color: #45a049;
-    transform: scale(1.05);
-  }
-  
-  .summaryToggleBtn:active {
-    transform: scale(0.98);
-  }
-  
-  
-  .summaryDropdown {
-    background-color: #fff;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease-out, opacity 0.3s ease;
-    opacity: 0;
-    margin-top: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .showDropdown {
-    max-height: 1000px; /* Adjust for a smooth transition based on content height */
-    opacity: 1;
-    transition: max-height 0.5s ease-in, opacity 0.3s ease;
-  }
-  
-  .hideDropdown {
-    max-height: 0;
-    opacity: 0;
-  }
-  
-  .summaryTable {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-  }
-  
-  .summaryTable th,
-  .summaryTable td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    vertical-align: middle;
-  }
-  
-  .summaryTable th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-    text-transform: uppercase;
+  .menuTable {
     font-size: 14px;
   }
-  
-  .summaryTable tr:last-child td {
-    border-bottom: none;
+
+  .menuTable th,
+  .menuTable td {
+    padding: 8px 10px;
   }
-  
-  .summaryTable tr:hover {
-    background-color: #f5f5f5;
+
+  .menuTable th:nth-child(4),
+  .menuTable td:nth-child(4) {
+    display: none;
   }
-  
-  /* Media Queries */
-  @media (max-width: 768px) {
-    .summaryCard {
-      padding: 15px;
-    }
-  
-    .summaryTable th,
-    .summaryTable td {
-      padding: 10px;
-    }
+
+  .addBtn,
+  .removeBtn {
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+    user-select: none;
   }
-  
-  @media (max-width: 480px) {
-    .summaryTable th:nth-child(3),
-    .summaryTable td:nth-child(3) {
-      display: none;
-    }
-  
-    .summaryTable th:nth-child(2),
-    .summaryTable td:nth-child(2) {
-      text-align: center;
-    }
+
+  .quantity {
+    font-size: 14px;
+    min-width: 24px;
   }
-  /* Summary Total */
+}
+
+@media (max-width: 480px) {
+  .menuTable th:nth-child(3),
+  .menuTable td:nth-child(3) {
+    display: none;
+  }
+
+  .actionGroup {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+.menuContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 95%;
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.dropdownMenu {
+  background-color: #f9f9f9;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.showDropdown {
+  max-height: 1000px;
+  opacity: 1;
+  transition: max-height 0.5s ease-in, opacity 0.3s ease;
+}
+
+.hideDropdown {
+  max-height: 0;
+  opacity: 0;
+}
+/* Summary Card Styles */
+.summaryCard {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Closed State Button - More Pronounced */
+.summaryToggleBtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.summaryToggleBtn:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+.summaryToggleBtn:active {
+  transform: scale(0.98);
+}
+
+
+.summaryDropdown {
+  background-color: #fff;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out, opacity 0.3s ease;
+  opacity: 0;
+  margin-top: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.showDropdown {
+  max-height: 1000px; /* Adjust for a smooth transition based on content height */
+  opacity: 1;
+  transition: max-height 0.5s ease-in, opacity 0.3s ease;
+}
+
+.hideDropdown {
+  max-height: 0;
+  opacity: 0;
+}
+
+.summaryTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.summaryTable th,
+.summaryTable td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  vertical-align: middle;
+}
+
+.summaryTable th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.summaryTable tr:last-child td {
+  border-bottom: none;
+}
+
+.summaryTable tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .summaryCard {
+    padding: 15px;
+  }
+
+  .summaryTable th,
+  .summaryTable td {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .summaryTable th:nth-child(3),
+  .summaryTable td:nth-child(3) {
+    display: none;
+  }
+
+  .summaryTable th:nth-child(2),
+  .summaryTable td:nth-child(2) {
+    text-align: center;
+  }
+}
+/* Summary Total */
 /* Summary Total - More Pronounced */
 .summaryTotal {
-    text-align: right;
-    margin-top: 20px;
-    padding: 15px;
-    font-size: 22px;
-    font-weight: bold;
-    background-color: #f2f2f2;
-    border-radius: 8px;
-    border: 2px solid #4CAF50;
-    color: #333;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .summaryTotal:hover {
-    background-color: #e0ffe0;
-  }
-  
-  
+  text-align: right;
+  margin-top: 20px;
+  padding: 15px;
+  font-size: 22px;
+  font-weight: bold;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  border: 2px solid #4CAF50;
+  color: #333;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.summaryTotal:hover {
+  background-color: #e0ffe0;
+}
+

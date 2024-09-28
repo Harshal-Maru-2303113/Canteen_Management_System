@@ -109,3 +109,18 @@ app.get('/cart',(req,res) => {
     }
   });
 });
+
+app.post('/pastorder',(req,res) => {
+  let constrain = "";
+  let resolve = "";
+  console.log(req.body);
+  if(req.body.getemail !== "admin@iitgoa.ac.in"){
+    constrain = " WHERE user_email = ?";
+    resolve = req.body.getemail;
+  }
+  console.log(resolve);
+  const find_query = `SELECT * FROM orders${constrain}`;
+  cms.query(find_query,resolve,(err,orders) => {
+    res.json(orders);
+  });
+});
