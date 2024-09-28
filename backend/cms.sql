@@ -1,4 +1,3 @@
-drop database cms;
 create database cms;
 use cms;
 create table users
@@ -21,10 +20,36 @@ primary key(order_id),
 foreign key(user_email) references users(user_email)
 );
 
-create table menu(
+create table category
+(
+	item_type varchar(100),
+	primary key(item_type)
+);
+
+create table southindian(
     item_name varchar(100),
     item_price int not null,
-	item_type enum("SouthIndain","FastFood","Beverages","Dishes") not null,
+    item_status boolean default 1,
+    primary key(item_name)
+); 
+
+create table fastfood(
+    item_name varchar(100),
+    item_price int not null,
+    item_status boolean default 1,
+    primary key(item_name)
+);
+
+create table beverage(
+    item_name varchar(100),
+    item_price int not null,
+    item_status boolean default 1,
+    primary key(item_name)
+);  
+
+create table dish(
+    item_name varchar(100),
+    item_price int not null,
     item_status boolean default 1,
     primary key(item_name)
 ); 

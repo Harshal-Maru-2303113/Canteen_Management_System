@@ -18,9 +18,6 @@ export default function HomePage() {
   },[Navigate]);
   return (
     <div className={homepage.mainHomepageContainer}>
-      <MenuCardCarousel />
-      <br /><br />
-      <PrevOrderCarousel />
     </div>
   );
 }

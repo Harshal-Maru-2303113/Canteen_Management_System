@@ -5,19 +5,32 @@ import axios from "axios";
 
 const Cart = () => {
   let Navigate = useNavigate();
-  var email;
+  const [email,setemail] = useState("");
+  const [menu,setmenu] = useState({});
+
   useEffect(() => {
     axios.get('http://localhost:5000/user',{
-      withCredentials: true
+      withCredentials: "include"
     })
     .then(res => {
-      email = res.data.email;
-      if(email === "")  return Navigate('/login');
+      const getemail = res.data.email;
+      if(getemail === "")  return Navigate('/login');
+      setemail(getemail);
     })
     .catch(err => console.log(err));
   },[Navigate]);
 
-  
+  useEffect(() => {
+    axios.get('http://localhost:5000/cart',{
+      withCredentials: "include"
+    })
+    .then(res => {
+      setmenu(res.data);
+      console.log(res.data);
+    })
+    .catch(err => console.log(err));
+  },[Navigate]);
+
   const [cart, setCart] = useState({
     fastFood: { burger: 0, pizza: 0, fries: 0 },
     beverage: { coke: 0, juice: 0, water: 0 },

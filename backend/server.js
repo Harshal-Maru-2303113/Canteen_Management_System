@@ -65,12 +65,12 @@ app.post('/signup',(req,res) => {
 app.get('/user', (req, res) => {
   if(Object.keys(req.cookies).length !== 0){
     const token = req.cookies['jwt'];
-    console.log(token);
     let value;
     value = jwt.verify(token, "secret");
     if(value){
       const find_query = "SELECT user_email FROM users WHERE user_email = ?";
       cms.query(find_query, [value.id], (err, user) => {
+        if(err) console.log(err);
         return res.json({ email: user[0].user_email });
       });
     } 
@@ -89,4 +89,25 @@ app.get('/logout',(req,res) => {
     maxAge: 0
   });
   return res.json({message : "Logged out sucessfully"});
+});
+
+app.get('/cart',(req,res) => {
+  var take_query = "SELECT * FROM category";
+  cms.query(take_query,(err,tables) => {
+    var menu = {
+      category : []
+    };
+    const total_types = tables.length;
+    for(let i = 0; i < total_types; i++){
+      const item = tables[i].item_type;
+      menu['category'].push(item);
+      take_query = `SELECT * FROM ${item}`;
+      cms.query(take_query,(err,items) => {
+        menu.item = items;
+        if (i === total_types-1) {
+          return res.json(menu);
+        }
+      });
+    }
+  });
 });
