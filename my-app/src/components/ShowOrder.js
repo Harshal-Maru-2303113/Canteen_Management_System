@@ -1,34 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from '../CSS/showOrder.module.css'; // Assuming you have a CSS file for styles
+import { useNavigate, useLocation } from 'react-router-dom';
 
-const Order = () => {
+const ShowOrder = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const id = location.state?.id; // Extract the order ID from location state if available
+  const [email, setEmail] = useState("");
   const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true); // Loading state
 
   useEffect(() => {
-    // const fetchOrders = async () => {
-    //   try {
-    //     const response = await axios.post('http://localhost:5000/pastorder', {}, { withCredentials: true });
-    //     setOrders(response.data);
-    //   } catch (err) {
-    //     console.error('Error fetching orders:', err);
-    //     setError('Could not fetch orders. Please try again later.');
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // };
+    axios.get('http://localhost:5000/user', { withCredentials: true })
+      .then(res => {
+        const getEmail = res.data.email;
+        if (getEmail === "") return navigate('/login'); // Redirect to login if not authenticated
+        setEmail(getEmail);
 
-    // fetchOrders();
-  }, []);
+        axios.post('http://localhost:5000/showorder', {
+          id,
+          email: getEmail
+        })
+        .then(res => {
+          setOrders(res.data);
+          setLoading(false); // Set loading to false when data is received
+        })
+        .catch(err => {
+          console.error('Error fetching orders:', err);
+          setLoading(false); // Set loading to false even if there's an error
+        });
+      })
+      .catch(err => {
+        console.error('Error fetching user:', err);
+        setLoading(false); // Set loading to false in case of error
+      });
+  }, [navigate, id]);
 
   if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
+    return <p>Loading...</p>;
   }
 
   return (
@@ -64,4 +74,4 @@ const Order = () => {
   );
 };
 
-export default Order;
+export default ShowOrder;

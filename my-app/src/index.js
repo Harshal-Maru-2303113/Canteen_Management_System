@@ -9,6 +9,7 @@ import NavBar from './components/NavBar';
 import Cart from './components/Cart';
 import ProfilePage from './components/ProfilePage';
 import PastOrder from './components/PastOrder';
+import ShowOrder from './components/ShowOrder'
 
 import {
 createBrowserRouter,
@@ -43,8 +44,11 @@ const router = createBrowserRouter([
   {
     path: "/pastorder",
     element: [<NavBar />,<PastOrder />,<Footer />]
+  },
+  {
+    path: "/order",
+    element: [<NavBar/> , <ShowOrder/>, <Footer/>]
   }
-  
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

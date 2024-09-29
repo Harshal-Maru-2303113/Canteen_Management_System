@@ -8,6 +8,8 @@ const signupRoute = require('./Routes/signup');
 const userRoute = require('./Routes/user');
 const cartRoute = require('./Routes/cart');
 const pastordersRoute = require('./Routes/pastorder');
+const orderRoute = require('./Routes/order');
+const showOrderRoute = require('./Routes/showorder')
 
 const app = express();
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
@@ -20,6 +22,8 @@ app.use(signupRoute);
 app.use(userRoute);
 app.use(cartRoute);
 app.use(pastordersRoute);
+app.use(orderRoute);
+app.use(showOrderRoute);
 
 app.listen(5000, () => {
   console.log("Backend started on port 5000");

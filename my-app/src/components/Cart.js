@@ -8,7 +8,12 @@ const Cart = () => {
   const [email, setEmail] = useState("");
   const [menu, setMenu] = useState({});
   const [cart, setCart] = useState({});
-  const [open, setOpen] = useState({ summary: 0 });
+  const [open, setOpen] = useState({ 
+    summary: 0,
+    items : "",
+    price : 0,
+    quantity : 0
+  });
 
   useEffect(() => {
     axios.get('http://localhost:5000/user', {
@@ -32,7 +37,7 @@ const Cart = () => {
 
   function initialize(menu) {
     let tempCart = {};
-    let tempOpen = { summary: 0 };
+    let tempOpen = {};
     Object.keys(menu).forEach((type) => {
       tempCart[type] = {};
       tempOpen[type] = 0;
@@ -74,25 +79,51 @@ const Cart = () => {
 
   const calculateTotalItems = () => {
     let sum = 0;
-    Object.values(cart).forEach(categoryItems => {
-      Object.values(categoryItems).forEach(quantity => {
+    let items = "";
+    let price = 0;
+    let temp = " ";
+    Object.keys(cart).forEach(category => {
+      Object.entries(cart[category]).forEach(([item,quantity]) => {
         sum += quantity;
+        items += temp + item + ` x ${quantity}`;
+        const itemDetails = menu[category]?.find(i => i.item_name === item);
+        const itemPrice = itemDetails ? itemDetails.item_price : 0;
+        price += quantity * itemPrice;
+        temp = ", ";
       });
     });
+    open["quantity"] = sum;
+    open["price"] = price;
+    open["items"] = items;
     return sum;
   };
 
-  const calculateTotalPrice = () => {
-    let price = 0;
-    Object.keys(cart).forEach((category) => {
-      Object.keys(cart[category]).forEach((item) => {
-        const itemDetails = menu[category]?.find(i => i.item_name === item);
-        const itemPrice = itemDetails ? itemDetails.item_price : 0;
-        price += cart[category][item] * itemPrice;
-      });
-    });
-    return price;
-  };
+  const reset = () => {
+    initialize(menu);
+  }
+
+  const placeorder = () => {
+    const price = open.price;
+    const quantity = open.quantity;
+    const items = open.items;
+    let date = new Date();
+    date.setHours(date.getHours() + 5);
+    date.setMinutes(date.getMinutes() + 30);
+    const indianDate = date.toISOString().slice(0, 19).replace('T', ' ');
+
+console.log(indianDate); 
+    axios.post('http://localhost:5000/order',{email,
+      items,
+      price,
+      date : indianDate
+    })
+    .then(res => {
+      return Navigate('/order',{state:{
+        id : res.data.id
+      }});
+    })
+    .catch(err => console.log(err));
+  }
 
   // Render loading state if menu is not loaded yet
   if (!menu || Object.keys(menu).length === 0) {
@@ -162,7 +193,7 @@ const Cart = () => {
         >
           {open.summary
             ? `Cart Summary - ${calculateTotalItems()} items`
-            : `Total: ${calculateTotalItems()} items, $${calculateTotalPrice()}`}
+            : `Total: ${calculateTotalItems()} items, $${open["price"]}`}
         </button>
         <div
           className={`${styles.summaryDropdown} ${open.summary ? styles.showDropdown : styles.hideDropdown}`}
@@ -193,16 +224,16 @@ const Cart = () => {
             </tbody>
           </table>
           <div className={styles.summaryTotal}>
-            <strong>Total: ${calculateTotalPrice()}</strong>
+            <strong>Total: ${open["price"]}</strong>
           </div>
         </div>
       </div>
       }
       <div className={styles.buttonContainer}>
-        <button className={styles.resetBtn}>
+        <button className={styles.resetBtn} onClick={reset}>
           Reset
         </button>
-        <button  className={styles.placeOrderBtn}>
+        <button  className={styles.placeOrderBtn} onClick={placeorder}>
           Place Order
         </button>
       </div>
