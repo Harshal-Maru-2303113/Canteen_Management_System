@@ -18,7 +18,8 @@ router.post('/showorder', (req, res) => {
         }
     }
     else{
-        find_query += "order_status != ?";
+        find_query += "order_status != ? and order_status != ?";
+        search.push("Cancelled");
     }
     cms.query(find_query,search,(err,orders) => {
         if(err) return console.log(err);

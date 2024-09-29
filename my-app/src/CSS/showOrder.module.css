@@ -1,49 +1,103 @@
+.ordersContainer {
+  padding: 20px;
+  background-color: #f0f4f8;
+  font-family: 'Roboto', sans-serif; /* Modern font */
+  color: #333; /* Text color for better contrast */
+}
 
-.orderContainer {
-    padding: 20px;
+.ordersTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  background-color: #ffffff; /* White background for better readability */
+  border-radius: 10px;
+  overflow: hidden; /* Rounds corners */
+}
+
+.ordersTable th, .ordersTable td {
+  border: none; /* Remove borders for cleaner look */
+  padding: 15px 10px;
+  text-align: left;
+  transition: all 0.3s ease-in-out;
+}
+
+.ordersTable th {
+  background-color: #009688; /* Darker shade for header */
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ordersTable tr {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.ordersTable tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.ordersTable tr:hover {
+  background-color: #e0f7fa; /* Soft highlight on hover */
+  transform: scale(1.02);
+}
+
+.ordersTable td {
+  font-size: 16px;
+  color: #555;
+}
+
+.ordersTable td:first-child {
+  font-weight: bold;
+}
+
+.statusDropdown {
+  padding: 8px;
+  background-color: #f0f4f8;
+  border: 1px solid #009688; /* Border matches the theme */
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  color: #009688;
+}
+
+.statusDropdown:hover {
+  background-color: #e0f2f1;
+}
+
+.statusDropdown:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 150, 136, 0.5); /* Focus animation */
+}
+
+.statusDropdown option {
+  padding: 10px;
+  color: #333;
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .ordersTable th, .ordersTable td {
+    font-size: 14px;
+    padding: 12px;
   }
-  
-  .orderTable {
+
+  .statusDropdown {
     width: 100%;
-    border-collapse: collapse;
+    padding: 10px;
   }
-  
-  .orderTable th, .orderTable td {
-    border: 1px solid #ddd;
+}
+
+@media (max-width: 480px) {
+  .ordersTable th, .ordersTable td {
+    font-size: 12px;
     padding: 8px;
   }
-  
-  .orderTable th {
-    background-color: #4CAF50;
-    color: white;
-    text-align: left;
+
+  .statusDropdown {
+    padding: 12px;
+    font-size: 14px;
   }
-  
-  .orderTable tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  .orderTable tr:hover {
-    background-color: #ddd;
-  }
-  .ordersContainer {
-    padding: 20px;
-    background-color: #f9f9f9;
-  }
-  
-  .ordersTable {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .ordersTable th,
-  .ordersTable td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  .ordersTable th {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
+}
