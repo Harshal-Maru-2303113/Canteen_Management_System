@@ -97,19 +97,19 @@ const ShowOrder = () => {
                       className={styles.statusDropdown}
                     >
                       {order.order_status === "notAccepted" &&
-                        <option value="SELECT">SELECT</option>
+                        <option value="SELECT" className="option">SELECT</option>
                       }
                       {order.order_status === "inProgress" &&
-                        <option value="SELECT">SELECT</option>
+                        <option value="SELECT" className="option">SELECT</option>
                       }
                       {order.order_status === "notAccepted" &&
-                        <option value="inProgress">inProgress</option>
+                        <option value="inProgress" className="option">inProgress</option>
                       }
                       {order.order_status === "notAccepted" &&
-                        <option value="Cancelled">Cancelled</option>
+                        <option value="Cancelled" className="option">Cancelled</option>
                       }
                       {order.order_status === "inProgress" &&
-                        <option value="Completed">Completed</option>
+                        <option value="Completed" className="option">Completed</option>
                       }
                     </select>
                   </td>

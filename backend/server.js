@@ -11,6 +11,7 @@ const pastordersRoute = require('./Routes/pastorder');
 const orderRoute = require('./Routes/order');
 const showOrderRoute = require('./Routes/showorder')
 const statusRoute = require('./Routes/status')
+const availableRoute = require('./Routes/available');
 
 const app = express();
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
@@ -26,6 +27,7 @@ app.use(pastordersRoute);
 app.use(orderRoute);
 app.use(showOrderRoute);
 app.use(statusRoute);
+app.use(availableRoute);
 
 app.listen(5000, () => {
   console.log("Backend started on port 5000");

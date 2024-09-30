@@ -8,31 +8,29 @@ const Cart = () => {
   const [email, setEmail] = useState("");
   const [menu, setMenu] = useState({});
   const [cart, setCart] = useState({});
-  const [open, setOpen] = useState({ 
+  const [open, setOpen] = useState({
     summary: 0,
-    items : "",
-    price : 0,
-    quantity : 0
+    items: "",
+    price: 0,
+    quantity: 0
   });
 
   useEffect(() => {
     axios.get('http://localhost:5000/user', {
       withCredentials: "include"
     })
-      .then(res => {
-        const getEmail = res.data.email;
-        if (getEmail === "") return Navigate('/login');
-        setEmail(getEmail);
-        axios.get('http://localhost:5000/cart', {
-          withCredentials: "include"
+    .then(res => {
+      const getEmail = res.data.email;
+      if (getEmail === "") return Navigate('/login');
+      setEmail(getEmail);
+      axios.get('http://localhost:5000/cart')
+        .then(res => {
+          setMenu(res.data);
+          initialize(res.data);
         })
-          .then(res => {
-            setMenu(res.data);
-            initialize(res.data);
-          })
-          .catch(err => console.log(err));
-      })
-      .catch(err => console.log(err));
+        .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
   }, [Navigate]);
 
   function initialize(menu) {
@@ -83,7 +81,7 @@ const Cart = () => {
     let price = 0;
     let temp = " ";
     Object.keys(cart).forEach(category => {
-      Object.entries(cart[category]).forEach(([item,quantity]) => {
+      Object.entries(cart[category]).forEach(([item, quantity]) => {
         sum += quantity;
         items += temp + item + ` x ${quantity}`;
         const itemDetails = menu[category]?.find(i => i.item_name === item);
@@ -98,9 +96,26 @@ const Cart = () => {
     return sum;
   };
 
+  const handleStatusChange = (category, name, status) => {
+    axios.post('http://localhost:5000/available', {
+      category,
+      name,
+      status
+    })
+    .then(res => {
+      axios.get('http://localhost:5000/cart')
+        .then(res => {
+          setMenu(res.data);
+          initialize(res.data);
+        })
+        .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
+  };
+
   const reset = () => {
     initialize(menu);
-  }
+  };
 
   const placeorder = () => {
     const price = open.price;
@@ -111,21 +126,22 @@ const Cart = () => {
     date.setMinutes(date.getMinutes() + 30);
     const indianDate = date.toISOString().slice(0, 19).replace('T', ' ');
 
-console.log(indianDate); 
-    axios.post('http://localhost:5000/order',{email,
+    axios.post('http://localhost:5000/order', {
+      email,
       items,
       price,
-      date : indianDate
+      date: indianDate
     })
     .then(res => {
-      return Navigate('/order',{state:{
-        id : res.data.id
-      }});
+      return Navigate('/order', {
+        state: {
+          id: res.data.id
+        }
+      });
     })
     .catch(err => console.log(err));
-  }
+  };
 
-  // Render loading state if menu is not loaded yet
   if (!menu || Object.keys(menu).length === 0) {
     return <div>Loading...</div>;
   }
@@ -155,88 +171,105 @@ console.log(indianDate);
               </thead>
               <tbody>
                 {menu[category]?.map((item, index) => (
-                  <tr key={item.item_name}>
-                    <td>{index + 1}</td>
-                    <td>{item.item_name}</td>
-                    <td>${item.item_price}</td>
-                    <td>{item.item_status ? "Available" : "Not Available"}</td>
-                    <td>
-                      <div className={styles.actionGroup}>
-                        <button
-                          className={styles.removeBtn}
-                          onClick={() => decrementItem(category, item.item_name)}
-                        >
-                          -
-                        </button>
-                        <span className={styles.quantity}>
-                          {cart[category]?.[item.item_name] || 0}
-                        </span>
-                        <button
-                          className={styles.addBtn}
-                          onClick={() => incrementItem(category, item.item_name)}
-                        >
-                          +
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
+                  (email === "admin@iitgoa.ac.in" || item.item_status === 1) && (
+                    <tr key={item.item_name}>
+                      <td>{index + 1}</td>
+                      <td>{item.item_name}</td>
+                      <td>${item.item_price}</td>
+                      <td>{item.item_status ? "Available" : "Not Available"}</td>
+                      {email !== "admin@iitgoa.ac.in" && (
+                        <td>
+                          <div className={styles.actionGroup}>
+                            <button
+                              className={styles.removeBtn}
+                              onClick={() => decrementItem(category, item.item_name)}
+                            >
+                              -
+                            </button>
+                            <span className={styles.quantity}>
+                              {cart[category]?.[item.item_name] || 0}
+                            </span>
+                            <button
+                              className={styles.addBtn}
+                              onClick={() => incrementItem(category, item.item_name)}
+                            >
+                              +
+                            </button>
+                          </div>
+                        </td>
+                      )}
+                      {email === "admin@iitgoa.ac.in" && (
+                        <td>
+                          <button
+                            className={!item.item_status ? styles.placeOrderBtn : styles.resetBtn}
+                            onClick={() => handleStatusChange(category, item.item_name, !item.item_status)}
+                          >
+                            {!item.item_status ? "Make Available" : "Make Not Available"}
+                          </button>
+                        </td>
+                      )}
+                    </tr>
+                  )
                 ))}
               </tbody>
             </table>
           </div>
         </div>
       ))}
-      {<div className={styles.summaryCard}>
-        <button
-          onClick={() => toggleDropdown("summary")}
-          className={styles.summaryToggleBtn}
-        >
-          {open.summary
-            ? `Cart Summary - ${calculateTotalItems()} items`
-            : `Total: ${calculateTotalItems()} items, $${open["price"]}`}
-        </button>
-        <div
-          className={`${styles.summaryDropdown} ${open.summary ? styles.showDropdown : styles.hideDropdown}`}
-        >
-          <table className={styles.summaryTable}>
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Quantity</th>
-                <th>Total Price</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Object.keys(cart).map((category) => (
-                Object.keys(cart[category]).map((item) => {
-                  const menuItem = menu[category].find(i => i.item_name === item);
-                  return (
-                    <tr key={item}>
-                      <td>{item}</td>
-                      <td>{cart[category][item]}</td>
-                      <td>
-                        ${cart[category][item] * (menuItem ? menuItem.item_price : 0)}
-                      </td>
-                    </tr>
-                  );
-                })
-              ))}
-            </tbody>
-          </table>
-          <div className={styles.summaryTotal}>
-            <strong>Total: ${open["price"]}</strong>
+      {email !== "admin@iitgoa.ac.in" && (
+        <>
+          <div className={styles.summaryCard}>
+            <button
+              onClick={() => toggleDropdown("summary")}
+              className={styles.summaryToggleBtn}
+            >
+              {open.summary
+                ? `Cart Summary - ${calculateTotalItems()} items`
+                : `Total: ${calculateTotalItems()} items, $${open["price"]}`}
+            </button>
+            <div
+              className={`${styles.summaryDropdown} ${open.summary ? styles.showDropdown : styles.hideDropdown}`}
+            >
+              <table className={styles.summaryTable}>
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Total Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Object.keys(cart).map((category) => (
+                    Object.keys(cart[category]).map((item) => {
+                      const menuItem = menu[category].find(i => i.item_name === item);
+                      return (
+                        <tr key={item}>
+                          <td>{item}</td>
+                          <td>{cart[category][item]}</td>
+                          <td>
+                            ${cart[category][item] * (menuItem ? menuItem.item_price : 0)}
+                          </td>
+                        </tr>
+                      );
+                    })
+                  ))}
+                </tbody>
+              </table>
+              <div className={styles.summaryTotal}>
+                <strong>Total: ${open["price"]}</strong>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      }
-      <div className={styles.buttonContainer}>
-        <button className={styles.resetBtn} onClick={reset}>
-          Reset
-        </button>
-        <button  className={styles.placeOrderBtn} onClick={placeorder}>
-          Place Order
-        </button>
-      </div>
+          <div className={styles.buttonContainer}>
+            <button className={styles.resetBtn} onClick={reset}>
+              Reset
+            </button>
+            <button className={styles.placeOrderBtn} onClick={placeorder}>
+              Place Order
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 };

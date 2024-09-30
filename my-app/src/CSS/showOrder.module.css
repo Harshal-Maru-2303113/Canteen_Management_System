@@ -71,7 +71,7 @@
   box-shadow: 0 0 5px rgba(0, 150, 136, 0.5); /* Focus animation */
 }
 
-.statusDropdown option {
+.statusDropdown .option {
   padding: 10px;
   color: #333;
   background-color: #ffffff;
