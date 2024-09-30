@@ -27,7 +27,7 @@ export default function HomePage() {
           <h3>Orders</h3>
           <p>Check your current orders</p>
         </div>
-        <div className={homepage.navCard} onClick={() => Navigate('/pastorders')}>
+        <div className={homepage.navCard} onClick={() => Navigate('/pastorder')}>
           <h3>Past Orders</h3>
           <p>Review your order history</p>
         </div>

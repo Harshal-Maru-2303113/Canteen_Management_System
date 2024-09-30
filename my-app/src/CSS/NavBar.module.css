@@ -1,6 +1,18 @@
+/* Root colors and variables */
+:root {
+    --primary-color: #4CAF50; /* Green for primary actions */
+    --secondary-color: #f44336; /* Red for removal actions */
+    --background-color: #f0f0f0; /* Light grey background */
+    --text-color: #333; /* Dark text */
+    --card-bg-color: #fff; /* White for cards */
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s; /* Smooth animations */
+}
+
+/* Navbar Styles */
 .navbar {
     display: flex;
-    background-color: rgb(7, 14, 19);
+    background-color: var(--background-color); /* Using background color */
     height: 82px;
     width: 100%;
     padding: 8px;
@@ -11,7 +23,7 @@
     justify-content: flex-start;
     align-items: center;
     width: 35%;
-    color: rgb(242, 79, 9);
+    color: var(--primary-color); /* Using primary color */
 }
 
 .navbar-right-side {
@@ -26,7 +38,7 @@
     width: 60px;
     height: 62px;
     margin: 3px;
-    border: 2px solid white;
+    border: 2px solid var(--text-color); /* Dark border for the logo */
     background-image: url(../images/iit-goa-logo.png);
     background-size: contain;
     background-position: center;
@@ -37,29 +49,38 @@
 .navbar-top-right-logo-text {
     margin: 10px;
     font-size: xx-large;
+    color: var(--primary-color); /* Using primary color for text */
 }
 
 .navbar-right-side-aboutUs,
 .navbar-right-side-login,
-.navbar-right-side-signup {
+.navbar-right-side-signup,
+.navbar-right-side-profile,
+.navbar-right-side-menu,
+.navbar-right-side-pastorder,
+.navbar-right-side-home {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 24px;
     font-weight: 550;
     height: 80%;
-    color: rgb(242, 79, 9);
+    color: var(--primary-color); /* Default text color */
     padding: 10px;
     margin: 5px;
     border-radius: 20px;
-    transition: 0.2s ease-in-out;
+    transition: var(--transition-speed) ease-in-out; /* Smooth hover transitions */
 }
 
 .navbar-right-side-aboutUs:hover,
 .navbar-right-side-login:hover,
-.navbar-right-side-signup:hover {
-    color: black;
-    background-color: rgb(242, 79, 9);
+.navbar-right-side-signup:hover,
+.navbar-right-side-profile:hover,
+.navbar-right-side-menu:hover,
+.navbar-right-side-pastorder:hover,
+.navbar-right-side-home:hover {
+    color: var(--text-color); /* Switch to text color on hover */
+    background-color: var(--primary-color); /* Background changes to primary color */
 }
 
 .navbar-right-side-,
@@ -67,31 +88,32 @@
     display: none;
 }
 
+/* Hamburger Menu */
 .hamburger-bar {
-    background-color: white;
+    background-color: var(--text-color); /* Dark color for hamburger bars */
     height: 6px;
     width: 40px;
     margin: 4px;
     padding: 4px;
-    transition: all 0.4s ease;
+    transition: all var(--transition-speed) ease;
 }
 
-/* Animation for the dropdown menu */
+/* Dropdown Menu */
 .hamburger-dropdown-menu {
     display: flex;
     flex-direction: column;
     position: absolute;
     top: 80px;
     right: 10px;
-    background-color: rgb(7, 14, 19);
+    background-color: var(--background-color); /* Light background */
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px var(--shadow-color); /* Shadow */
     padding: 10px;
     z-index: 1000;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
-    transition: all 0.4s ease;
+    transition: all var(--transition-speed) ease;
 }
 
 .hamburger-dropdown-menu div {
@@ -100,13 +122,13 @@
     width: 100px;
     text-align: center;
     font-size: 18px;
-    color: rgb(242, 79, 9);
+    color: var(--primary-color); /* Text color for dropdown items */
     border-radius: 10px;
 }
 
 .hamburger-dropdown-menu div:hover {
-    color: black;
-    background-color: rgb(242, 79, 9);
+    color: var(--text-color); /* Text color changes on hover */
+    background-color: var(--primary-color); /* Background color on hover */
 }
 
 .hamburger-dropdown-menu.open {
@@ -127,6 +149,7 @@
     transform: rotate(-45deg) translate(10px, -10px);
 }
 
+/* Responsive Design */
 @media only screen and (max-width: 750px) {
     .navbar-right-side {
         display: none;

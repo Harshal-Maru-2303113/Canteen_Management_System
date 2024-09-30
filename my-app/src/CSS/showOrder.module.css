@@ -40,7 +40,6 @@
 
 .ordersTable tr:hover {
   background-color: #e0f7fa; /* Soft highlight on hover */
-  transform: scale(1.02);
 }
 
 .ordersTable td {

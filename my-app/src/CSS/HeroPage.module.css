@@ -1,67 +1,79 @@
+/* Root colors and variables */
+:root {
+    --primary-color: #4CAF50; /* Green for primary actions */
+    --secondary-color: #f44336; /* Red for removal actions */
+    --background-color: #f0f0f0; /* Light grey background */
+    --text-color: #333; /* Dark text */
+    --card-bg-color: #fff; /* White for cards */
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s; /* Smooth animations */
+}
+
+/* Hero Section */
 .hero {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 2rem 3rem; /* Consistent with navbar padding */
-    background-color: #f4f4f4; /* Light background */
+    padding: 2rem 3rem;
+    background-color: var(--background-color); /* Use the root background color */
     height: 94dvh;
 }
 
 .hero-content {
     max-width: 50%;
-    text-align: left; /* Align text to the left for better readability */
+    text-align: left;
 }
 
 .hero-title {
-    font-size: 3rem; /* Large title */
-    margin-bottom: 1rem; /* Space below title */
-    color: #333; 
-    padding: 1rem;/* Dark color for contrast */
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--text-color); /* Use root text color */
+    padding: 1rem;
 }
 
 .hero-description {
-    font-size: 1.25rem; /* Medium description size */
-    margin-bottom: 2rem; /* Space below description */
-    color: #666; 
-    padding: 1rem;/* Subtle color for description */
-}
-.button{
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    color: #666; /* Optional change, can use the same */
     padding: 1rem;
+}
 
+.button {
+    padding: 1rem;
 }
 
 .btn {
-    padding: 0.5rem 1rem; /* Consistent button padding */
+    padding: 0.5rem 1rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px; /* Match button radius */
     text-decoration: none;
-    color: #fff; /* White text color */
-    transition: background 0.3s; /* Transition for hover effect */
+    color: white; /* Ensure white text color */
+    transition: background-color var(--transition-speed); /* Smooth transition */
 }
 
 .btn-primary {
     margin: 0.3rem;
-    background-color: #007bff; /* Primary button color */
+    background-color: var(--primary-color); /* Use the root primary color */
 }
 
 .btn-primary:hover {
-    background-color: #0056b3; /* Darker on hover */
+    background-color: #388e3c; /* Slightly darker green for hover */
 }
 
 .btn-secondary {
     margin: 0.3rem;
-    background-color: #6c757d; /* Secondary button color */
+    background-color: var(--secondary-color); /* Use root secondary color */
 }
 
 .btn-secondary:hover {
-    background-color: #5a6268; /* Darker on hover */
+    background-color: darken(var(--secondary-color), 10%);
 }
 
 .hero-image {
-    max-width: 40%; /* Control image size */
+    max-width: 40%;
 }
 
 .hero-image img {
     max-width: 100%;
-    height: auto; /* Maintain aspect ratio */
+    height: auto;
 }

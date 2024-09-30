@@ -1,6 +1,6 @@
 import React from "react";
 import Heropage from "../CSS/HeroPage.module.css"; // Import the CSS module
-
+import {Link} from "react-router-dom";
 
 export default function HeroPage() {
   
@@ -14,12 +14,10 @@ export default function HeroPage() {
             effortlessly.
           </p>
           <div className={Heropage.button}>
-            <a href="#menu" className={`${Heropage.btn} ${Heropage['btn-primary']}`}>
+          <Link to={"/cart"} className={`${Heropage.btn} ${Heropage['btn-primary']}`}>
               View Menu
-            </a>
-            <a href="#order" className={`${Heropage.btn} ${Heropage['btn-secondary']}`}>
-              Order Now
-            </a>
+            </Link>
+            
           </div>
         </div>
         <div className={Heropage['hero-image']}>

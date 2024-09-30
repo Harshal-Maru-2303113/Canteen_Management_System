@@ -36,15 +36,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/cart",
-    element: [<NavBar />,<Cart />,<Footer />]
+    element: [<NavBar aboutUs="aboutUs" home='home' profile='profile' pastorder='pastorder'/>,<Cart />,<Footer />]
   },
   {
     path: "/profile",
-    element: [<NavBar />,<ProfilePage />,<Footer />]
+    element: [<NavBar aboutUs="aboutUs" home='home' menu='menu' pastorder='pastorder'/>,<ProfilePage />,<Footer />]
   },
   {
     path: "/pastorder",
-    element: [<NavBar />,<PastOrder />,<Footer />]
+    element: [<NavBar aboutUs="aboutUs" home='home' menu='menu' profile='profile' />,<PastOrder />,<Footer />]
   },
   {
     path: "/order",

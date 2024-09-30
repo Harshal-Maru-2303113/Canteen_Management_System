@@ -7,8 +7,8 @@
 
 /* Footer styles */
 .footer {
-    background-color: rgb(7, 14, 19); /* Dark background matching navbar */
-    color: white;
+    background-color: var(--background-color-dark); /* Dark background matching navbar */
+    color: var(--text-color-light); /* Using light text color */
     padding: 2rem 0;
     text-align: center;
     display: flex;
@@ -21,13 +21,14 @@
     justify-content: space-around;
     gap: 2rem;
     padding: 1rem;
+    background-color:rgb(240, 240, 240);
 }
 
 /* Footer column titles */
 .footer-column h4 {
     font-size: 1.4rem;
     margin-bottom: 1rem;
-    color: rgb(242, 79, 9); /* Orange highlight for headings */
+    color: var(--primary-color); /* Orange highlight for headings */
 }
 
 /* Footer column text */
@@ -35,7 +36,7 @@
     font-size: 1rem;
     line-height: 1.5;
     margin: 0.5rem 0;
-    color: white; /* White for readability */
+    color: var(--text-color-light); /* White/light text for readability */
 }
 
 /* Footer lists */
@@ -48,19 +49,19 @@
 .footer-column ul li {
     margin: 0.5rem 0;
     font-size: 0.95rem;
-    color: white; /* White text for consistency */
+    color: var(--text-color-light); /* Consistent light text color */
 }
 
 /* Footer links */
 .footer-column ul li a {
-    color: white;
+    color: var(--text-color-light); /* Consistent link color */
     text-decoration: none;
-    transition: color 0.3s, transform 0.3s;
+    transition: color var(--transition-speed), transform var(--transition-speed);
 }
 
 /* Link hover effect */
 .footer-column ul li a:hover {
-    color: rgb(242, 79, 9); /* Orange hover effect matching navbar */
+    color: var(--primary-color); /* Orange hover effect matching navbar */
     transform: translateY(-3px); /* Subtle lift on hover */
 }
 
@@ -68,7 +69,7 @@
 .social-icons a {
     margin: 0 0.5rem;
     display: inline-block;
-    transition: transform 0.3s, filter 0.3s;
+    transition: transform var(--transition-speed), filter var(--transition-speed);
 }
 
 /* Social icon images */
@@ -76,7 +77,7 @@
     width: 30px;
     height: 30px;
     filter: brightness(0) invert(1); /* White icons */
-    transition: transform 0.3s;
+    transition: transform var(--transition-speed);
 }
 
 /* Hover effect for social icons */
@@ -89,7 +90,7 @@
 .footer-bottom {
     margin-top: 1.5rem;
     font-size: 0.9rem;
-    color: white; /* White text for the footer bottom */
+    color: var(--text-color-light); /* Light text for the footer bottom */
 }
 
 /* Responsiveness for mobile screens */
@@ -112,4 +113,13 @@
     .footer-column ul li {
         font-size: 0.9rem;
     }
+}
+:root {
+    --primary-color: #4CAF50; /* Green for primary actions */
+    --secondary-color: #f44336; /* Red for removal actions */
+    --background-color: #f0f0f0; /* Light grey background */
+    --text-color: #333; /* Dark text */
+    --card-bg-color: #fff; /* White for cards */
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s; /* Smooth animations */
 }
