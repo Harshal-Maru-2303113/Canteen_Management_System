@@ -1,0 +1,133 @@
+/* Center the payment container vertically and horizontally */
+.paymentContainer {
+  background-color: #ffffff; /* A clean white background for the container */
+  padding: 30px;
+  width: 100%;
+  max-width: 600px;
+  margin: auto; /* Center horizontally */
+  position: absolute; 
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center vertically */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.paymentOptions {
+  margin-bottom: 40px;
+}
+
+.radioGroup {
+  margin-bottom: 15px;
+}
+
+.radioInput {
+  margin-right: 10px;
+}
+
+.radioLabel {
+  font-size: 18px;
+  color: #444;
+  cursor: pointer;
+}
+
+.paymentSection {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #f3f4f6;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.inputField {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.inputField:focus {
+  border-color: #4CAF50;
+  outline: none;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.confirmBtn, .cancelBtn {
+  padding: 12px 30px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.confirmBtn {
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+}
+
+.cancelBtn {
+  background-color: #f44336;
+  color: white;
+  border-radius: 5px;
+}
+
+.confirmBtn:hover {
+  background-color: #388E3C;
+  transform: scale(1.05);
+}
+
+.cancelBtn:hover {
+  background-color: #D32F2F;
+  transform: scale(1.05);
+}
+
+/* Apply a background color to the whole page */
+.body {
+  background-color: #05636f; /* Light cyan color for a soft, modern feel */
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .paymentContainer {
+    padding: 20px;
+    max-width: 90%;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .inputField {
+    font-size: 14px;
+  }
+
+  .confirmBtn, .cancelBtn {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+}

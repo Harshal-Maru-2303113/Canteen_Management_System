@@ -14,7 +14,6 @@ router.post('/available', (req, res) => {
             console.error(err);
             return res.json({ error: 'Database query error' });
         }
-        console.log(item);
         return res.json(item);
     });
 });

@@ -28,7 +28,28 @@ export default function PastOrder() {
 
   const showMoreOrders = () => {
     setVisibleOrders(prev => prev + 3);
-  }
+  };
+
+  const reorder = (name,price) => {
+    let date = new Date();
+    date.setHours(date.getHours() + 5);
+    date.setMinutes(date.getMinutes() + 30);
+    const indianDate = date.toISOString().slice(0, 19).replace('T', ' ');
+    axios.post('http://localhost:5000/order', {
+      email,
+      name,
+      price,
+      date: indianDate
+    })
+    .then(res => {
+      return Navigate('/order', {
+        state: {
+          id: res.data.id
+        }
+      });
+    })
+    .catch(err => console.log(err));
+  };
   
   return (
     <div className={styles.body}>
@@ -55,8 +76,9 @@ export default function PastOrder() {
                 </div>
               </div>
               <div className={styles['button-group']}>
-                <button className={`${styles.button} ${styles.reorder}`}>REORDER</button>
-                <button className={`${styles.button} ${styles.help}`}>HELP</button>
+                <button className={`${styles.button} ${styles.reorder}`}
+                onClick={() => reorder(order.ordered_items,order.order_price)}>REORDER</button>
+                <button className={`${styles.button} ${styles.help}`}>RATING</button>
               </div>
               <div className={styles['total-paid']}>
                 Total Paid: <span className={styles.price}>₹ {order.order_price}</span>

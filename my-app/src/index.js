@@ -10,6 +10,7 @@ import Cart from './components/Cart';
 import ProfilePage from './components/ProfilePage';
 import PastOrder from './components/PastOrder';
 import ShowOrder from './components/ShowOrder'
+import PaymentPage from './components/PaymentPage';
 
 import {
 createBrowserRouter,
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
   {
     path: "/order",
     element: [<NavBar/> , <ShowOrder/>]
+  },
+  {
+    path : "/payment",
+    element: <PaymentPage/>
   }
 ]);
 
