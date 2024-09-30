@@ -30,25 +30,19 @@ export default function PastOrder() {
     setVisibleOrders(prev => prev + 3);
   };
 
-  const reorder = (name,price) => {
+  const reorder = (items,price) => {
     let date = new Date();
     date.setHours(date.getHours() + 5);
     date.setMinutes(date.getMinutes() + 30);
     const indianDate = date.toISOString().slice(0, 19).replace('T', ' ');
-    axios.post('http://localhost:5000/order', {
-      email,
-      name,
-      price,
-      date: indianDate
-    })
-    .then(res => {
-      return Navigate('/order', {
-        state: {
-          id: res.data.id
-        }
-      });
-    })
-    .catch(err => console.log(err));
+    return Navigate('/payment',{
+      state : {
+        email,
+        items,
+        price,
+        date : indianDate
+      }
+    });
   };
   
   return (

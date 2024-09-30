@@ -13,11 +13,11 @@ router.post('/showorder', (req, res) => {
             search = [id];
         } else {
             find_query += "user_email = ? AND (order_status != ? AND order_status != ?)";
-            search.push(email, "Completed", "Cancelled");
+            search.push(email, "Delivered", "Cancelled");
         }
     } else {
         find_query += "(order_status != ? AND order_status != ?)";
-        search.push("Completed", "Cancelled");
+        search.push("Delivered", "Cancelled");
     }
     cms.query(find_query, search, (err, orders) => {
         if (err) return console.log(err);

@@ -66,7 +66,7 @@ const ShowOrder = () => {
     <div className={styles.ordersContainer}>
       <h2>Recent orders</h2>
       {orders.length === 0 ? (
-        <p>No orders found.</p>
+        <p>No orders found, Check on pastOrders</p>
       ) : (
         <table className={styles.ordersTable}>
           <thead>
@@ -102,6 +102,9 @@ const ShowOrder = () => {
                       {order.order_status === "inProgress" &&
                         <option value="SELECT" className="option">SELECT</option>
                       }
+                      {order.order_status === "Completed" &&
+                        <option value="SELECT" className="option">SELECT</option>
+                      }
                       {order.order_status === "notAccepted" &&
                         <option value="inProgress" className="option">inProgress</option>
                       }
@@ -110,6 +113,9 @@ const ShowOrder = () => {
                       }
                       {order.order_status === "inProgress" &&
                         <option value="Completed" className="option">Completed</option>
+                      }
+                      {order.order_status === "Completed" &&
+                        <option value="Delivered" className="option">Delivered</option>
                       }
                     </select>
                   </td>

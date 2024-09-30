@@ -20,7 +20,7 @@ createBrowserRouter,
 const router = createBrowserRouter([
   {
     path: "/",
-    element: [<NavBar aboutUs="aboutUs" login="login" signup='signup' />,<HeroPage />,<Footer />]
+    element: [<NavBar aboutUs="aboutUs" login="login" signup='signup' home='home'/>,<HeroPage />,<Footer />]
   },
   {
     path: "/login",
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/order",
-    element: [<NavBar/> , <ShowOrder/>]
+    element: [<NavBar aboutUs="aboutUs" home='home' menu='menu' profile='profile'/> , <ShowOrder/>]
   },
   {
     path : "/payment",

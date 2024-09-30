@@ -125,21 +125,14 @@ const Cart = () => {
     date.setHours(date.getHours() + 5);
     date.setMinutes(date.getMinutes() + 30);
     const indianDate = date.toISOString().slice(0, 19).replace('T', ' ');
-
-    axios.post('http://localhost:5000/order', {
-      email,
-      items,
-      price,
-      date: indianDate
-    })
-    .then(res => {
-      return Navigate('/order', {
-        state: {
-          id: res.data.id
-        }
-      });
-    })
-    .catch(err => console.log(err));
+    return Navigate('/payment',{
+      state : {
+        email,
+        items,
+        price,
+        date : indianDate
+      }
+    });
   };
 
   if (!menu || Object.keys(menu).length === 0) {

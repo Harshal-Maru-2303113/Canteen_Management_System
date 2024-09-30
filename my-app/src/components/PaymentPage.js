@@ -1,15 +1,61 @@
 import React, { useState, useEffect } from "react";
 import styles from '../CSS/PaymentPage.module.css';
+import { useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 const PaymentPage = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [selectedMethod, setSelectedMethod] = useState('');
+  const [email,setEmail] = useState("");
+  const [items,setitem] = useState("");
+  const [price,setprice] = useState("");
+  const [date,setdate] = useState("");
+
+  useEffect(() => {
+    const getemail = location.state?.email;
+    const getitems = location.state?.items;
+    const getprice = location.state?.price;
+    const getdate = location.state?.date;
+    if (getemail === undefined || getitems === undefined || getprice === undefined || getdate === undefined) {
+      return navigate('/');
+    }
+    setEmail(getemail);
+    setitem(getitems);
+    setprice(getprice);
+    setdate(getdate);
+  },[navigate,location.state]);
 
   const handleMethodChange = (e) => {
-    setSelectedMethod(e.target.value);
+    setSelectedMethod(e.target.value)
   };
 
+  const confirmOrder = (email,items,price,date) => {
+    if(selectedMethod === ""){
+      return console.log("Choose payment method");
+    }
+    axios.post('http://localhost:5000/order', {
+      email,
+      items,
+      price,
+      date
+    })
+    .then(res => {
+      return navigate('/order', {
+        state: {
+          id: res.data.id
+        }
+      });
+    })
+    .catch(err => console.log(err));
+  }
+
+  const cancel = () => {
+    return navigate('/');
+  }
+
   return (
-    <div className={styles.body}> 
+    <div className={styles.body}>
       <div className={styles.paymentContainer}>
         <h1 className={styles.title}>Complete Your Payment</h1>
 
@@ -78,9 +124,24 @@ const PaymentPage = () => {
           )}
         </div>
 
+        <div className={styles.radioGroup}>
+          <input
+            type="radio"
+            id="cash"
+            name="paymentMethod"
+            value="CASH"
+            checked={selectedMethod === 'CASH'}
+            onChange={handleMethodChange}
+            className={styles.radioInput}
+          />
+          <label htmlFor="cash" className={styles.radioLabel}>Cash on Dilivery</label>
+        </div>
+
         <div className={styles.buttonGroup}>
-          <button className={styles.confirmBtn}>Confirm Order</button>
-          <button className={styles.cancelBtn}>Cancel</button>
+          <button className={styles.confirmBtn}
+          onClick={() => confirmOrder(email,items,price,date)}>Confirm Order</button>
+          <button className={styles.cancelBtn}
+          onClick={() => cancel()}>Cancel</button>
         </div>
       </div>
     </div>
