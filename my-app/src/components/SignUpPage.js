@@ -55,7 +55,7 @@ export default function SignUp() {
           if(message){
             return clearForm("email", "error-email", message);
           }
-          return Navigate('/login');
+          return Navigate('/login',{replace:true});
         })
         .catch(err => console.log(err));
     }
@@ -90,7 +90,8 @@ export default function SignUp() {
                 placeholder="IITGOA Email"
                 required
                 onClick={() => clearError('error-email')}
-                className={SignUpPage.input} // Ensure input SignUpPage are managed
+                className={SignUpPage.input} 
+                autoComplete='off'
               />
               <span className={SignUpPage['error-message']} id="error-email">
                 Email is required
@@ -102,7 +103,8 @@ export default function SignUp() {
                 placeholder="Full Name"
                 required
                 onClick={() => clearError('error-name')}
-                className={SignUpPage.input} // Ensure input SignUpPage are managed
+                className={SignUpPage.input} 
+                autoComplete='off'
               />
               <span className={SignUpPage['error-message']} id="error-name">
                 Full Name is required
@@ -115,7 +117,8 @@ export default function SignUp() {
                   placeholder="Password"
                   required
                   onClick={() => clearError('error-pass')}
-                  className={SignUpPage.input} // Ensure input SignUpPage are managed
+                  className={SignUpPage.input} 
+                  autoComplete='off'
                 />
                 <button
                   type="button"
@@ -140,7 +143,8 @@ export default function SignUp() {
                   placeholder="Confirm Password"
                   required
                   onClick={() => clearError('error-confi-pass')}
-                  className={SignUpPage.input} // Ensure input SignUpPage are managed
+                  className={SignUpPage.input} 
+                  autoComplete='off'
                 />
                 <button
                   type="button"

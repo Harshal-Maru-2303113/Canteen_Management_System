@@ -1,11 +1,11 @@
 :root {
-    --primary-color: #4CAF50; /* Green for primary actions */
-    --secondary-color: #f44336; /* Red for removal actions */
-    --background-color: #f0f0f0; /* Light grey background */
-    --text-color: #333; /* Dark text */
-    --card-bg-color: #fff; /* White for cards */
+    --primary-color: #4CAF50;
+    --secondary-color: #f44336;
+    --background-color: #f0f0f0;
+    --text-color: #333;
+    --card-bg-color: #fff;
     --shadow-color: rgba(0, 0, 0, 0.1);
-    --transition-speed: 0.3s; /* Smooth animations */
+    --transition-speed: 0.3s;
 }
 
 .body {
@@ -210,7 +210,7 @@
     opacity: 0;
 }
 
-/* Media query for responsiveness */
+
 @media (max-width: 810px) {
     .order {
         flex-direction: column;

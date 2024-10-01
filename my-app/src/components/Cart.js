@@ -168,7 +168,7 @@ const Cart = () => {
                     <tr key={item.item_name}>
                       <td>{index + 1}</td>
                       <td>{item.item_name}</td>
-                      <td>${item.item_price}</td>
+                      <td>₹{item.item_price}</td>
                       <td>{item.item_status ? "Available" : "Not Available"}</td>
                       {email !== "admin@iitgoa.ac.in" && (
                         <td>

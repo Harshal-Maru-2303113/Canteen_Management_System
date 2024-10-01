@@ -86,7 +86,7 @@ const ShowOrder = () => {
                 <td>{order.order_id}</td>
                 {email === "admin@iitgoa.ac.in" && <td>{order.user_email}</td>}
                 <td>{order.ordered_items}</td>
-                <td>${order.order_price}</td>
+                <td>₹{order.order_price}</td>
                 <td>{new Date(order.order_time).toLocaleString()}</td>
                 <td>{order.order_status}</td>
                 {email === "admin@iitgoa.ac.in" && (

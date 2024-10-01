@@ -41,7 +41,8 @@ export default function PastOrder() {
         items,
         price,
         date : indianDate
-      }
+      },
+      replace:true
     });
   };
   

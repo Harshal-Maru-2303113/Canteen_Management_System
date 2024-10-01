@@ -1,29 +1,29 @@
 .ordersContainer {
   padding: 20px;
   background-color: #f0f4f8;
-  font-family: 'Roboto', sans-serif; /* Modern font */
-  color: #333; /* Text color for better contrast */
+  font-family: 'Roboto', sans-serif;
+  color: #333;
 }
 
 .ordersTable {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  background-color: #ffffff; /* White background for better readability */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
   border-radius: 10px;
-  overflow: hidden; /* Rounds corners */
+  overflow: hidden;
 }
 
 .ordersTable th, .ordersTable td {
-  border: none; /* Remove borders for cleaner look */
+  border: none;
   padding: 15px 10px;
   text-align: left;
   transition: all 0.3s ease-in-out;
 }
 
 .ordersTable th {
-  background-color: #009688; /* Darker shade for header */
+  background-color: #009688;
   color: white;
   font-weight: bold;
   text-transform: uppercase;
@@ -39,7 +39,7 @@
 }
 
 .ordersTable tr:hover {
-  background-color: #e0f7fa; /* Soft highlight on hover */
+  background-color: #e0f7fa;
 }
 
 .ordersTable td {
@@ -54,7 +54,7 @@
 .statusDropdown {
   padding: 8px;
   background-color: #f0f4f8;
-  border: 1px solid #009688; /* Border matches the theme */
+  border: 1px solid #009688;
   border-radius: 8px;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -67,7 +67,7 @@
 
 .statusDropdown:focus {
   outline: none;
-  box-shadow: 0 0 5px rgba(0, 150, 136, 0.5); /* Focus animation */
+  box-shadow: 0 0 5px rgba(0, 150, 136, 0.5);
 }
 
 .statusDropdown .option {

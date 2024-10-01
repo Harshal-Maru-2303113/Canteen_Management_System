@@ -18,7 +18,7 @@ const PaymentPage = () => {
     const getprice = location.state?.price;
     const getdate = location.state?.date;
     if (getemail === undefined || getitems === undefined || getprice === undefined || getdate === undefined) {
-      return navigate('/');
+      return navigate('/',{replace:true});
     }
     setEmail(getemail);
     setitem(getitems);
@@ -27,7 +27,7 @@ const PaymentPage = () => {
   },[navigate,location.state]);
 
   const handleMethodChange = (e) => {
-    setSelectedMethod(e.target.value)
+    setSelectedMethod(e.target.value);
   };
 
   const confirmOrder = (email,items,price,date) => {
@@ -44,20 +44,41 @@ const PaymentPage = () => {
       return navigate('/order', {
         state: {
           id: res.data.id
-        }
+        },
+        replace: true
       });
     })
     .catch(err => console.log(err));
   }
 
   const cancel = () => {
-    return navigate('/');
+    return navigate('/',{replace: true});
   }
 
   return (
     <div className={styles.body}>
       <div className={styles.paymentContainer}>
         <h1 className={styles.title}>Complete Your Payment</h1>
+        
+        <div className={styles.orderDetails}>
+          <h2 className={styles.orderDetailsTitle}>Order Details</h2>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>Email:</span>
+            <span className={styles.detailValue}>{email}</span>
+          </div>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>Items:</span>
+            <span className={styles.detailValue}>{items}</span>
+          </div>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>Total Price:</span>
+            <span className={styles.detailValue}>₹{price}</span>
+          </div>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>Date:</span>
+            <span className={styles.detailValue}>{date}</span>
+          </div>
+        </div>
 
         <div className={styles.paymentOptions}>
           <div className={styles.radioGroup}>
@@ -134,12 +155,12 @@ const PaymentPage = () => {
             onChange={handleMethodChange}
             className={styles.radioInput}
           />
-          <label htmlFor="cash" className={styles.radioLabel}>Cash on Dilivery</label>
+          <label htmlFor="cash" className={styles.radioLabel}>Cash on Delivery</label>
         </div>
 
         <div className={styles.buttonGroup}>
           <button className={styles.confirmBtn}
-          onClick={() => confirmOrder(email,items,price,date)}>Confirm Order</button>
+          onClick={() => confirmOrder(email, items, price, date)}>Confirm Order</button>
           <button className={styles.cancelBtn}
           onClick={() => cancel()}>Cancel</button>
         </div>

@@ -1,14 +1,14 @@
-/* Center the payment container vertically and horizontally */
+
 .paymentContainer {
-  background-color: #ffffff; /* A clean white background for the container */
+  background-color: #ffffff;
   padding: 30px;
   width: 100%;
   max-width: 600px;
-  margin: auto; /* Center horizontally */
+  margin: auto;
   position: absolute; 
   top: 50%; 
   left: 50%;
-  transform: translate(-50%, -50%); /* Center vertically */
+  transform: translate(-50%, -50%);
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -102,9 +102,9 @@
   transform: scale(1.05);
 }
 
-/* Apply a background color to the whole page */
+
 .body {
-  background-color: rgb(240, 240, 240);; /* Light cyan color for a soft, modern feel */
+  background-color: rgb(240, 240, 240);;
   margin: 0;
   height: 100vh;
   display: flex;
@@ -134,11 +134,71 @@
 
 
 :root {
-  --primary-color: #4CAF50; /* Green for primary actions */
-  --secondary-color: #f44336; /* Red for removal actions */
-  --background-color: #f0f0f0; /* Light grey background */
-  --text-color: #333; /* Dark text */
-  --card-bg-color: #fff; /* White for cards */
+  --primary-color: #4CAF50;
+  --secondary-color: #f44336;
+  --background-color: #f0f0f0;
+  --text-color: #333;
+  --card-bg-color: #fff;
   --shadow-color: rgba(0, 0, 0, 0.1);
-  --transition-speed: 0.3s; /* Smooth animations */
+  --transition-speed: 0.3s;
 }
+
+
+.orderDetails {
+  margin-bottom: 40px;
+  padding: 20px;
+  background-color: var(--card-bg-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px var(--shadow-color);
+  text-align: left;
+}
+
+.orderDetailsTitle {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 20px;
+}
+
+.detailItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.detailLabel {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.detailValue {
+  font-size: 18px;
+  color: var(--text-color);
+}
+
+
+.paymentContainer {
+  background-color: #ffffff;
+  padding: 30px;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  position: absolute; 
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+

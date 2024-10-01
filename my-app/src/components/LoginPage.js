@@ -46,10 +46,10 @@ export default function Login() {
             return clearForm("password", "error-pass", message);
           }
           if(message === "Email is not registered"){
-            return Navigate('/signup');
+            return Navigate('/signup',{replace:true});
           }
         }
-        return Navigate('/home');
+        return Navigate('/home',{replace:true});
       })
       .catch(err => console.log(err));
     }
@@ -85,6 +85,7 @@ export default function Login() {
                 placeholder="IITGOA Email"
                 required
                 onClick={() => clearError('error-email')}
+                autoComplete="off"
               />
               <span className={LoginPage['error-message']} id="error-email">
                 Email is required
@@ -97,6 +98,7 @@ export default function Login() {
                   placeholder="Password"
                   required
                   onClick={() => clearError('error-pass')}
+                  autoComplete="off"
                 />
                 <button
                   type="button"

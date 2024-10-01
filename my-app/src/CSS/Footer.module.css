@@ -1,14 +1,14 @@
-/* Main content area */
+
 .content {
     flex: 1;
     padding: 2rem;
     text-align: center;
 }
 
-/* Footer styles */
+
 .footer {
-    background-color: var(--background-color-dark); /* Dark background matching navbar */
-    color: var(--text-color-light); /* Using light text color */
+    background-color: var(--background-color-dark);
+    color: var(--text-color-light);
     padding: 2rem 0;
     text-align: center;
     display: flex;
@@ -24,76 +24,76 @@
     background-color:rgb(240, 240, 240);
 }
 
-/* Footer column titles */
+
 .footer-column h4 {
     font-size: 1.4rem;
     margin-bottom: 1rem;
-    color: var(--primary-color); /* Orange highlight for headings */
+    color: var(--primary-color);
 }
 
-/* Footer column text */
+
 .footer-column p {
     font-size: 1rem;
     line-height: 1.5;
     margin: 0.5rem 0;
-    color: var(--text-color-light); /* White/light text for readability */
+    color: var(--text-color-light);
 }
 
-/* Footer lists */
+
 .footer-column ul {
     list-style: none;
     padding: 0;
 }
 
-/* Footer list items */
+
 .footer-column ul li {
     margin: 0.5rem 0;
     font-size: 0.95rem;
-    color: var(--text-color-light); /* Consistent light text color */
+    color: var(--text-color-light);
 }
 
-/* Footer links */
+
 .footer-column ul li a {
-    color: var(--text-color-light); /* Consistent link color */
+    color: var(--text-color-light);
     text-decoration: none;
     transition: color var(--transition-speed), transform var(--transition-speed);
 }
 
-/* Link hover effect */
+
 .footer-column ul li a:hover {
-    color: var(--primary-color); /* Orange hover effect matching navbar */
-    transform: translateY(-3px); /* Subtle lift on hover */
+    color: var(--primary-color);
+    transform: translateY(-3px);
 }
 
-/* Social icons */
+
 .social-icons a {
     margin: 0 0.5rem;
     display: inline-block;
     transition: transform var(--transition-speed), filter var(--transition-speed);
 }
 
-/* Social icon images */
+
 .social-icons img {
     width: 30px;
     height: 30px;
-    filter: brightness(0) invert(1); /* White icons */
+    filter: brightness(0) invert(1);
     transition: transform var(--transition-speed);
 }
 
-/* Hover effect for social icons */
+
 .social-icons a:hover img {
-    transform: scale(1.2); /* Slight zoom-in on hover */
-    filter: brightness(1); /* Brightness change */
+    transform: scale(1.2);
+    filter: brightness(1);
 }
 
-/* Footer bottom section */
+
 .footer-bottom {
     margin-top: 1.5rem;
     font-size: 0.9rem;
-    color: var(--text-color-light); /* Light text for the footer bottom */
+    color: var(--text-color-light);
 }
 
-/* Responsiveness for mobile screens */
+
 @media (max-width: 768px) {
     .footer-container {
         flex-direction: column;
@@ -115,11 +115,11 @@
     }
 }
 :root {
-    --primary-color: #4CAF50; /* Green for primary actions */
-    --secondary-color: #f44336; /* Red for removal actions */
-    --background-color: #f0f0f0; /* Light grey background */
-    --text-color: #333; /* Dark text */
-    --card-bg-color: #fff; /* White for cards */
+    --primary-color: #4CAF50;
+    --secondary-color: #f44336;
+    --background-color: #f0f0f0;
+    --text-color: #333;
+    --card-bg-color: #fff;
     --shadow-color: rgba(0, 0, 0, 0.1);
-    --transition-speed: 0.3s; /* Smooth animations */
+    --transition-speed: 0.3s;
 }

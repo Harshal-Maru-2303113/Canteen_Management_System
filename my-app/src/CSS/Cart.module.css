@@ -34,35 +34,35 @@
 }
 .buttonContainer {
   display: flex;
-  justify-content: flex-end; /* Aligns buttons to the right */
-  margin-top: 20px; /* Adjusts spacing from the content above */
+  justify-content: flex-end;
+  margin-top: 20px;
 }
 
 .resetBtn, .placeOrderBtn {
   padding: 10px 20px;
-  margin-left: 10px; /* Space between buttons */
+  margin-left: 10px;
   border: none;
-  border-radius: 5px; /* Rounded corners */
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease; /* Transition effect */
+  transition: background-color 0.3s ease;
 }
 
 .resetBtn {
-  background-color: #f44336; /* Red for reset */
+  background-color: #f44336;
   color: white;
 }
 
 .resetBtn:hover {
-  background-color: #d32f2f; /* Darker red on hover */
+  background-color: #d32f2f;
 }
 
 .placeOrderBtn {
-  background-color: #4CAF50; /* Green for place order */
+  background-color: #4CAF50;
   color: white;
 }
 
 .placeOrderBtn:hover {
-  background-color: #388E3C; /* Darker green on hover */
+  background-color: #388E3C;
 }
 
 .dropdownBtn:hover {
@@ -240,7 +240,7 @@
   max-height: 0;
   opacity: 0;
 }
-/* Summary Card Styles */
+
 .summaryCard {
   margin-top: 30px;
   padding: 20px;
@@ -250,7 +250,7 @@
   transition: all 0.3s ease;
 }
 
-/* Closed State Button - More Pronounced */
+
 .summaryToggleBtn {
   background-color: #4CAF50;
   color: white;
@@ -288,7 +288,7 @@
 }
 
 .showDropdown {
-  max-height: 1000px; /* Adjust for a smooth transition based on content height */
+  max-height: 1000px;
   opacity: 1;
   transition: max-height 0.5s ease-in, opacity 0.3s ease;
 }
@@ -327,7 +327,7 @@
   background-color: #f5f5f5;
 }
 
-/* Media Queries */
+
 @media (max-width: 768px) {
   .summaryCard {
     padding: 15px;
@@ -350,8 +350,8 @@
     text-align: center;
   }
 }
-/* Summary Total */
-/* Summary Total - More Pronounced */
+
+
 .summaryTotal {
   text-align: right;
   margin-top: 20px;

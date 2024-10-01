@@ -1,21 +1,21 @@
-/* Root colors and variables */
+
 :root {
-    --primary-color: #4CAF50; /* Green for primary actions */
-    --secondary-color: #f44336; /* Red for removal actions */
-    --background-color: #f0f0f0; /* Light grey background */
-    --text-color: #333; /* Dark text */
-    --card-bg-color: #fff; /* White for cards */
+    --primary-color: #4CAF50;
+    --secondary-color: #f44336;
+    --background-color: #f0f0f0;
+    --text-color: #333;
+    --card-bg-color: #fff;
     --shadow-color: rgba(0, 0, 0, 0.1);
-    --transition-speed: 0.3s; /* Smooth animations */
+    --transition-speed: 0.3s;
 }
 
-/* Hero Section */
+
 .hero {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 2rem 3rem;
-    background-color: var(--background-color); /* Use the root background color */
+    background-color: var(--background-color);
     height: 94dvh;
 }
 
@@ -27,14 +27,14 @@
 .hero-title {
     font-size: 3rem;
     margin-bottom: 1rem;
-    color: var(--text-color); /* Use root text color */
+    color: var(--text-color);
     padding: 1rem;
 }
 
 .hero-description {
     font-size: 1.25rem;
     margin-bottom: 2rem;
-    color: #666; /* Optional change, can use the same */
+    color: #666;
     padding: 1rem;
 }
 
@@ -45,24 +45,24 @@
 .btn {
     padding: 0.5rem 1rem;
     border: none;
-    border-radius: 25px; /* Match button radius */
+    border-radius: 25px;
     text-decoration: none;
-    color: white; /* Ensure white text color */
-    transition: background-color var(--transition-speed); /* Smooth transition */
+    color: white;
+    transition: background-color var(--transition-speed);
 }
 
 .btn-primary {
     margin: 0.3rem;
-    background-color: var(--primary-color); /* Use the root primary color */
+    background-color: var(--primary-color);
 }
 
 .btn-primary:hover {
-    background-color: #388e3c; /* Slightly darker green for hover */
+    background-color: #388e3c;
 }
 
 .btn-secondary {
     margin: 0.3rem;
-    background-color: var(--secondary-color); /* Use root secondary color */
+    background-color: var(--secondary-color);
 }
 
 .btn-secondary:hover {
