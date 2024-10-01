@@ -21,8 +21,8 @@ export default function Login() {
   }
 
   function submitForm() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
     let val = 1;
     if (email === "") {
       val = 0;

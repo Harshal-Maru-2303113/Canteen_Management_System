@@ -369,3 +369,109 @@
   background-color: #e0ffe0;
 }
 
+.adminDropdownSection {
+  margin-top: 20px;
+}
+
+.adminPanel {
+  background-color: #f9f9f9;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out, opacity 0.3s ease;
+  opacity: 0;
+  margin-top: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.showDropdown {
+  max-height: 1000px;
+  opacity: 1;
+  transition: max-height 0.5s ease-in, opacity 0.3s ease;
+}
+
+.hideDropdown {
+  max-height: 0;
+  opacity: 0;
+}
+
+.addCategoryPanel, .addItemPanel {
+  padding: 15px 0;
+}
+
+.adminToggleBtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.adminToggleBtn:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+.adminToggleBtn:active {
+  transform: scale(0.98);
+}
+
+.addCategoryPanel input, .addItemPanel input, .addItemPanel select {
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  width: 100%;
+  transition: border-color 0.3s ease;
+}
+
+.addCategoryPanel input:focus, .addItemPanel input:focus, .addItemPanel select:focus {
+  border-color: #4CAF50;
+  outline: none;
+}
+
+.addCategoryPanel button, .addItemPanel button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.addCategoryPanel button:hover, .addItemPanel button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+.addCategoryPanel button:active, .addItemPanel button:active {
+  transform: scale(0.98);
+}
+
+.errorMessage {
+  color: #ff4d4d; /* A red color for error messages */
+  background-color: #ffe6e6; /* Light red background */
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 2px solid #ff4d4d;
+  border-radius: 8px;
+  margin-top: 10px;
+  text-align: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0; /* Initially hidden */
+  transform: scale(0.98);
+}
+
+.showError {
+  opacity: 1; /* Show when error is present */
+  transform: scale(1);
+}

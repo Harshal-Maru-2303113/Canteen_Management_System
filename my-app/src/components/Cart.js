@@ -12,25 +12,28 @@ const Cart = () => {
     summary: 0,
     items: "",
     price: 0,
-    quantity: 0
+    quantity: 0,
+    admin : 0,
+    add_category : 0,
+    add_item : 0
   });
-
+  
   useEffect(() => {
     axios.get('http://localhost:5000/user', {
       withCredentials: "include"
     })
-    .then(res => {
-      const getEmail = res.data.email;
-      if (getEmail === "") return Navigate('/login');
-      setEmail(getEmail);
-      axios.get('http://localhost:5000/cart')
-        .then(res => {
-          setMenu(res.data);
-          initialize(res.data);
-        })
-        .catch(err => console.log(err));
-    })
-    .catch(err => console.log(err));
+      .then(res => {
+        const getEmail = res.data.email;
+        if (getEmail === "") return Navigate('/login');
+        setEmail(getEmail);
+        axios.get('http://localhost:5000/cart')
+          .then(res => {
+            setMenu(res.data);
+            initialize(res.data);
+          })
+          .catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
   }, [Navigate]);
 
   function initialize(menu) {
@@ -102,15 +105,15 @@ const Cart = () => {
       name,
       status
     })
-    .then(res => {
-      axios.get('http://localhost:5000/cart')
-        .then(res => {
-          setMenu(res.data);
-          initialize(res.data);
-        })
-        .catch(err => console.log(err));
-    })
-    .catch(err => console.log(err));
+      .then(res => {
+        axios.get('http://localhost:5000/cart')
+          .then(res => {
+            setMenu(res.data);
+            initialize(res.data);
+          })
+          .catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
   };
 
   const reset = () => {
@@ -125,14 +128,76 @@ const Cart = () => {
     date.setHours(date.getHours() + 5);
     date.setMinutes(date.getMinutes() + 30);
     const indianDate = date.toISOString().slice(0, 19).replace('T', ' ');
-    return Navigate('/payment',{
-      state : {
+    return Navigate('/payment', {
+      state: {
         email,
         items,
         price,
-        date : indianDate
+        date: indianDate
       }
     });
+  };
+
+  
+
+  const [newCategory, setNewCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [newItemName, setNewItemName] = useState("");
+  const [newItemPrice, setNewItemPrice] = useState(0);
+  const [categoryError, setCategoryError] = useState("");
+  const [itemError, setItemError] = useState("");
+
+  const handleAddCategory = () => {
+    if(newCategory !== ""){
+      axios.post('http://localhost:5000/category',{
+        category : newCategory
+      })
+      .then(res => {
+        axios.get('http://localhost:5000/cart')
+          .then(res => {
+            setMenu(res.data);
+            initialize(res.data);
+          })
+          .catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
+    }
+    else{
+      setCategoryError("Enter a valid category");
+    }
+  };
+
+  // Function to handle adding a new item
+  const handleAddItem = () => {
+      if(selectedCategory !== ""){
+        if(newItemName !== ""){
+          if(newItemPrice !== 0){
+            axios.post('http://localhost:5000/item',{
+              category : selectedCategory,
+              name : newItemName,
+              price : newItemPrice
+            })
+            .then(res => {
+              axios.get('http://localhost:5000/cart')
+                .then(res => {
+                  setMenu(res.data);
+                  initialize(res.data);
+                })
+                .catch(err => console.log(err));
+            })
+            .catch(err => console.log(err));
+          }
+          else{
+            setItemError("Enter a valid price");
+          }
+        }
+        else{
+          setItemError("Enter a valid name");
+        }
+      }
+      else{
+        setItemError("Select a valid category");
+      }
   };
 
   if (!menu || Object.keys(menu).length === 0) {
@@ -218,7 +283,7 @@ const Cart = () => {
             >
               {open.summary
                 ? `Cart Summary - ${calculateTotalItems()} items`
-                : `Total: ${calculateTotalItems()} items, $${open["price"]}`}
+                : `Total: ${calculateTotalItems()} items, ₹${open["price"]}`}
             </button>
             <div
               className={`${styles.summaryDropdown} ${open.summary ? styles.showDropdown : styles.hideDropdown}`}
@@ -249,7 +314,7 @@ const Cart = () => {
                 </tbody>
               </table>
               <div className={styles.summaryTotal}>
-                <strong>Total: ${open["price"]}</strong>
+                <strong>Total: ₹{open["price"]}</strong>
               </div>
             </div>
           </div>
@@ -263,7 +328,77 @@ const Cart = () => {
           </div>
         </>
       )}
-    </div>
+      {email === "admin@iitgoa.ac.in" && (
+        <div className={styles.adminDropdown}>
+          <button className={styles.adminToggleBtn} onClick={() => {toggleDropdown("admin")}}>
+            {open.admin ? "Hide Admin Panel" : "Show Admin Panel"}
+          </button>
+
+          <div className={`${styles.adminPanel} ${open.admin ? styles.showDropdown : styles.hideDropdown}`}>
+            <h3>Admin Panel</h3>
+
+            <div className={styles.adminDropdownSection}>
+              <button className={styles.adminToggleBtn} onClick={() => {toggleDropdown("add_category")}}>
+                {open.add_category ? "Hide Add Category" : "Add New Category"}
+              </button>
+              <div className={`${styles.addCategoryPanel} ${open.add_category ? styles.showDropdown : styles.hideDropdown}`}>
+                <input
+                  type="text"
+                  value={newCategory}
+                  onChange={(e) => setNewCategory((e.target.value).trim())}
+                  placeholder="New Category Name"
+                />
+                {categoryError && (
+                  <div className={`${styles.errorMessage} ${categoryError ? styles.showError : ""}`}>
+                    {categoryError}
+                  </div>
+                )}
+                <button onClick={() => {handleAddCategory()}}>Add Category</button>
+              </div>
+            </div>
+
+            <div className={styles.adminDropdownSection}>
+              <button className={styles.adminToggleBtn} onClick={() => {toggleDropdown("add_item")}}>
+                {open.add_item ? "Hide Add Item" : "Add New Item"}
+              </button>
+              <div className={`${styles.addItemPanel} ${open.add_item ? styles.showDropdown : styles.hideDropdown}`}>
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                >
+                  <option value="">Select Category</option>
+                  {Object.keys(menu).map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  type="text"
+                  value={newItemName}
+                  onChange={(e) => setNewItemName((e.target.value).trim())}
+                  placeholder="New Item Name"
+                />
+                <input
+                  type="number"
+                  value={newItemPrice}
+                  onChange={(e) => setNewItemPrice(Math.abs(e.target.value))}
+                  placeholder="New Item Price"
+                />
+                {itemError && (
+                  <div className={`${styles.errorMessage} ${itemError ? styles.showError : ""}`}>
+                    {itemError}
+                  </div>
+                )}
+                <button onClick={() => {handleAddItem()}}>Add Item</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+
+    </div >
   );
 };
 

@@ -21,10 +21,10 @@ export default function SignUp() {
   }
   
   function submitForm() {
-    const email = document.getElementById("email").value;
-    const name = document.getElementById("name").value;
-    const password = document.getElementById("password").value;
-    const confi_pass = document.getElementById("confi-pass").value;
+    const email = document.getElementById("email").value.trim();
+    const name = document.getElementById("name").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const confi_pass = document.getElementById("confi-pass").value.trim();
     let val = 1;
     if (email === "") {
       val = 0;
