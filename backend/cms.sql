@@ -15,7 +15,7 @@ user_email varchar(100),
 ordered_items varchar(200) not null,
 order_price int not null,
 order_time datetime not null,
-order_status enum("Completed","Cancelled","inProgress","notAccepted","Dlivered") not null default "notAccepted",
+order_status enum("Completed","Cancelled","inProgress","notAccepted","Delivered") not null default "notAccepted",
 primary key(order_id),
 foreign key(user_email) references users(user_email)
 );
